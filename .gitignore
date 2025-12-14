@@ -1,0 +1,19 @@
+# Qt Creator build directories
+build-*/
+
+# Qt Creator temporary files
+*.autosave
+*.user
+*.user.* 
+*.pro.user
+*.pro.user.* 
+*.qmake.stash
+*.qrc
+*.moc
+*.obj
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.log
