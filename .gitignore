@@ -17,4 +17,4 @@ build-*/
 *.dll
 *.exe
 *.log
-!resources/*.qrc
+!Resources/*.qrc
