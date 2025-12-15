@@ -6,20 +6,12 @@
                 {
                     "entries": [
                         {
-                            "codegenResult": 0,
-                            "column": 22,
-                            "durationMicroseconds": 176,
-                            "functionName": "weight",
-                            "line": 14,
-                            "message": ""
-                        },
-                        {
-                            "codegenResult": 0,
-                            "column": 27,
-                            "durationMicroseconds": 29,
-                            "functionName": "centerIn",
-                            "line": 15,
-                            "message": ""
+                            "codegenResult": 2,
+                            "column": 23,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 13,
+                            "message": "Could not find property \"fill\"."
                         }
                     ],
                     "filePath": "C:/Users/leggrjames/Documents/PersonalPlus/Main.qml"

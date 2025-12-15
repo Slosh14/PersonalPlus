@@ -1,0 +1,39 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                        {
+                            "codegenResult": 0,
+                            "column": 23,
+                            "durationMicroseconds": 148,
+                            "functionName": "fill",
+                            "line": 10,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 22,
+                            "durationMicroseconds": 50,
+                            "functionName": "weight",
+                            "line": 19,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 99,
+                            "functionName": "centerIn",
+                            "line": 20,
+                            "message": ""
+                        }
+                    ],
+                    "filePath": "C:/Users/leggrjames/Documents/PersonalPlus/login.qml"
+                }
+            ],
+            "moduleId": "PersonalPlus(appPersonalPlus)"
+        }
+    ]
+}

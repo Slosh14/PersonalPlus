@@ -1,18 +1,17 @@
 import QtQuick
-import QtQuick.Controls 2.15
+import QtQuick.Controls
 
 ApplicationWindow {
-    width: 640
-    height: 480
+    id: mainWindow
+    width: 1920
+    height: 1080
     visible: true
-    title: qsTr("Personal Plus")
+    title: qsTr("PersonalPlus")
 
-    Text {
-        text: "Sign In"
-        font.family: "Nexa-Trial"
-        font.pointSize: 24
-        font.weight: Font.Black       // For Bold variant
-        anchors.centerIn: parent
+    StackView {
+        id: stackView
+        anchors.fill: parent
+
+        initialItem: "login.qml"
     }
-
 }

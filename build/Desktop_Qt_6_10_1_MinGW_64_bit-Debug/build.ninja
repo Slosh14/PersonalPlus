@@ -47,7 +47,7 @@ cmake_ninja_workdir = C$:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_
 #############################################
 # Order-only phony target for appPersonalPlus
 
-build cmake_object_order_depends_target_appPersonalPlus: phony || .qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp .qt/rcc/qrc_appPersonalPlus_raw_res_0.cpp .qt/rcc/qrc_qmake_PersonalPlus.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_qmlcache_loader.cpp PersonalPlus/appPersonalPlus.qmltypes appPersonalPlus_autogen appPersonalPlus_autogen/mocs_compilation.cpp appPersonalPlus_autogen/timestamp appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan apppersonalplus_qmltyperegistrations.cpp generate_qmlls_build_ini_file meta_types/appPersonalPlus_json_file_list.txt meta_types/appPersonalPlus_json_file_list.txt.timestamp meta_types/qt6apppersonalplus_metatypes.json meta_types/qt6apppersonalplus_metatypes.json.gen
+build cmake_object_order_depends_target_appPersonalPlus: phony || .qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp .qt/rcc/qrc_appPersonalPlus_raw_res_0.cpp .qt/rcc/qrc_qmake_PersonalPlus.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_login_qml.cpp .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_qmlcache_loader.cpp PersonalPlus/appPersonalPlus.qmltypes appPersonalPlus_autogen appPersonalPlus_autogen/mocs_compilation.cpp appPersonalPlus_autogen/timestamp appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan apppersonalplus_qmltyperegistrations.cpp generate_qmlls_build_ini_file meta_types/appPersonalPlus_json_file_list.txt meta_types/appPersonalPlus_json_file_list.txt.timestamp meta_types/qt6apppersonalplus_metatypes.json meta_types/qt6apppersonalplus_metatypes.json.gen
 
 build CMakeFiles/appPersonalPlus.dir/appPersonalPlus_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__appPersonalPlus_unscanned_Debug C$:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appPersonalPlus_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_appPersonalPlus
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
@@ -97,6 +97,14 @@ build CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/
   OBJECT_DIR = CMakeFiles\appPersonalPlus.dir
   OBJECT_FILE_DIR = CMakeFiles\appPersonalPlus.dir\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.rcc\qmlcache
 
+build CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_login_qml.cpp.obj: CXX_COMPILER__appPersonalPlus_unscanned_Debug C$:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_login_qml.cpp || cmake_object_order_depends_target_appPersonalPlus
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\appPersonalPlus.dir\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.rcc\qmlcache\appPersonalPlus_login_qml.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appPersonalPlus_autogen/include -IC:/Users/leggrjames/Documents/PersonalPlus -isystem C:/Qt/6.10.1/mingw_64/include/QtQml -isystem C:/Qt/6.10.1/mingw_64/include -isystem C:/Qt/6.10.1/mingw_64/include/QtCore -isystem C:/Qt/6.10.1/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.10.1/mingw_64/include/QtQmlIntegration -isystem C:/Qt/6.10.1/mingw_64/include/QtNetwork -isystem C:/Qt/6.10.1/mingw_64/include/QtQuick -isystem C:/Qt/6.10.1/mingw_64/include/QtGui -isystem C:/Qt/6.10.1/mingw_64/include/QtOpenGL
+  OBJECT_DIR = CMakeFiles\appPersonalPlus.dir
+  OBJECT_FILE_DIR = CMakeFiles\appPersonalPlus.dir\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.rcc\qmlcache
+
 build CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp.obj: CXX_COMPILER__appPersonalPlus_unscanned_Debug C$:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp || cmake_object_order_depends_target_appPersonalPlus
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_NETWORK_LIB -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DQT_QUICK_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\appPersonalPlus.dir\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\rcc\qrc_appPersonalPlus_raw_qml_0.cpp.obj.d
@@ -121,7 +129,7 @@ build CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/
 #############################################
 # Link the executable appPersonalPlus.exe
 
-build appPersonalPlus.exe: CXX_EXECUTABLE_LINKER__appPersonalPlus_Debug CMakeFiles/appPersonalPlus.dir/appPersonalPlus_autogen/mocs_compilation.cpp.obj CMakeFiles/appPersonalPlus.dir/main.cpp.obj CMakeFiles/appPersonalPlus.dir/apppersonalplus_qmltyperegistrations.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_qmake_PersonalPlus.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_qmlcache_loader.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_Main_qml.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_res_0.cpp.obj | C$:/Qt/6.10.1/mingw_64/lib/libQt6Quick.a C$:/Qt/6.10.1/mingw_64/lib/libQt6OpenGL.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Qml.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Network.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a || appPersonalPlus_autogen appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan generate_qmlls_build_ini_file
+build appPersonalPlus.exe: CXX_EXECUTABLE_LINKER__appPersonalPlus_Debug CMakeFiles/appPersonalPlus.dir/appPersonalPlus_autogen/mocs_compilation.cpp.obj CMakeFiles/appPersonalPlus.dir/main.cpp.obj CMakeFiles/appPersonalPlus.dir/apppersonalplus_qmltyperegistrations.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_qmake_PersonalPlus.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_qmlcache_loader.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_Main_qml.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_login_qml.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp.obj CMakeFiles/appPersonalPlus.dir/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_res_0.cpp.obj | C$:/Qt/6.10.1/mingw_64/lib/libQt6Quick.a C$:/Qt/6.10.1/mingw_64/lib/libQt6OpenGL.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Qml.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Network.a C$:/Qt/6.10.1/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a || appPersonalPlus_autogen appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan generate_qmlls_build_ini_file
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.10.1/mingw_64/lib/libQt6Quick.a  C:/Qt/6.10.1/mingw_64/lib/libQt6OpenGL.a  C:/Qt/6.10.1/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -luser32  C:/Qt/6.10.1/mingw_64/lib/libQt6Qml.a  C:/Qt/6.10.1/mingw_64/lib/libQt6Network.a  C:/Qt/6.10.1/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.10.1/mingw_64/lib/libQt6EntryPoint.a  -lws2_32  -lshell32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -202,13 +210,13 @@ build generate_qmlls_build_ini_file: phony CMakeFiles/generate_qmlls_build_ini_f
 #############################################
 # Utility command for module_appPersonalPlus_aotstats_target
 
-build module_appPersonalPlus_aotstats_target: phony CMakeFiles/module_appPersonalPlus_aotstats_target .rcc/qmlcache/module_appPersonalPlus.aotstats .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats apppersonalplus_qmltyperegistrations.cpp PersonalPlus/appPersonalPlus.qmltypes appPersonalPlus_qmltyperegistration
+build module_appPersonalPlus_aotstats_target: phony CMakeFiles/module_appPersonalPlus_aotstats_target .rcc/qmlcache/module_appPersonalPlus.aotstats .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_login_qml.cpp .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats apppersonalplus_qmltyperegistrations.cpp PersonalPlus/appPersonalPlus.qmltypes appPersonalPlus_qmltyperegistration
 
 
 #############################################
 # Utility command for all_aotstats
 
-build all_aotstats: phony CMakeFiles/all_aotstats .rcc/qmlcache/all_aotstats.aotstats .rcc/qmlcache/all_aotstats.txt .rcc/qmlcache/module_appPersonalPlus.aotstats .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats apppersonalplus_qmltyperegistrations.cpp PersonalPlus/appPersonalPlus.qmltypes module_appPersonalPlus_aotstats_target
+build all_aotstats: phony CMakeFiles/all_aotstats .rcc/qmlcache/all_aotstats.aotstats .rcc/qmlcache/all_aotstats.txt .rcc/qmlcache/module_appPersonalPlus.aotstats .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_login_qml.cpp .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats apppersonalplus_qmltyperegistrations.cpp PersonalPlus/appPersonalPlus.qmltypes module_appPersonalPlus_aotstats_target
 
 
 #############################################
@@ -341,9 +349,18 @@ build .rcc/qmlcache/appPersonalPlus_Main_qml.cpp .rcc/qmlcache/appPersonalPlus_M
 
 
 #############################################
+# Custom command for .rcc\qmlcache\appPersonalPlus_login_qml.cpp
+
+build .rcc/qmlcache/appPersonalPlus_login_qml.cpp .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats | ${cmake_ninja_workdir}.rcc/qmlcache/appPersonalPlus_login_qml.cpp ${cmake_ninja_workdir}.rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmlcachegen.exe C$:/Users/leggrjames/Documents/PersonalPlus/login.qml .qt/rcc/qmake_PersonalPlus.qrc .qt/rcc/appPersonalPlus_raw_qml_0.qrc .qt/rcc/appPersonalPlus_raw_res_0.qrc PersonalPlus/appPersonalPlus.qmltypes PersonalPlus/qmldir
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug && C:\Qt\Tools\CMake_64\bin\cmake.exe -E make_directory C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmlcachegen.exe --bare --resource-path /qt/qml/PersonalPlus/login.qml -I C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug -I C:/Qt/6.10.1/mingw_64/qml -i C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/PersonalPlus/qmldir --resource C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qmake_PersonalPlus.qrc --resource C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_qml_0.qrc --resource C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_res_0.qrc --dump-aot-stats --module-id=PersonalPlus(appPersonalPlus) -o C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_login_qml.cpp C:/Users/leggrjames/Documents/PersonalPlus/login.qml"
+  DESC = Generating .rcc/qmlcache/appPersonalPlus_login_qml.cpp, .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats
+  restat = 1
+
+
+#############################################
 # Custom command for .qt\rcc\qrc_appPersonalPlus_raw_qml_0.cpp
 
-build .qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp | ${cmake_ninja_workdir}.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp: CUSTOM_COMMAND C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml .qt/rcc/appPersonalPlus_raw_qml_0.qrc C$:/Qt/6.10.1/mingw_64/bin/rcc.exe || appPersonalPlus_autogen appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan generate_qmlls_build_ini_file
+build .qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp | ${cmake_ninja_workdir}.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp: CUSTOM_COMMAND C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml .qt/rcc/appPersonalPlus_raw_qml_0.qrc C$:/Qt/6.10.1/mingw_64/bin/rcc.exe || appPersonalPlus_autogen appPersonalPlus_autogen_timestamp_deps appPersonalPlus_copy_qml appPersonalPlus_copy_res appPersonalPlus_qmlimportscan generate_qmlls_build_ini_file
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug && C:\Qt\6.10.1\mingw_64\bin\rcc.exe --output C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_appPersonalPlus_raw_qml_0.cpp --name appPersonalPlus_raw_qml_0 C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_qml_0.qrc --no-zstd"
   DESC = Running rcc for resource appPersonalPlus_raw_qml_0
   restat = 1
@@ -387,21 +404,21 @@ build CMakeFiles/appPersonalPlus_qmltyperegistration | ${cmake_ninja_workdir}CMa
 #############################################
 # Custom command for CMakeFiles\appPersonalPlus_qmllint
 
-build CMakeFiles/appPersonalPlus_qmllint | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml .rcc/qmllint/appPersonalPlus.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
+build CMakeFiles/appPersonalPlus_qmllint | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml .rcc/qmllint/appPersonalPlus.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmllint.exe @C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmllint/appPersonalPlus.rsp"
 
 
 #############################################
 # Custom command for CMakeFiles\appPersonalPlus_qmllint_json
 
-build CMakeFiles/appPersonalPlus_qmllint_json | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint_json: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml .rcc/qmllint/appPersonalPlus_json.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
+build CMakeFiles/appPersonalPlus_qmllint_json | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint_json: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml .rcc/qmllint/appPersonalPlus_json.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmllint.exe @C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmllint/appPersonalPlus_json.rsp"
 
 
 #############################################
 # Custom command for CMakeFiles\appPersonalPlus_qmllint_module
 
-build CMakeFiles/appPersonalPlus_qmllint_module | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint_module: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml .rcc/qmllint/appPersonalPlus_module.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
+build CMakeFiles/appPersonalPlus_qmllint_module | ${cmake_ninja_workdir}CMakeFiles/appPersonalPlus_qmllint_module: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmllint.exe C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml .rcc/qmllint/appPersonalPlus_module.rsp || all_qmltyperegistrations appPersonalPlus_qmltyperegistration
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmllint.exe @C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmllint/appPersonalPlus_module.rsp"
 
 
@@ -414,7 +431,7 @@ build CMakeFiles/appPersonalPlus_copy_qml | ${cmake_ninja_workdir}CMakeFiles/app
 #############################################
 # Custom command for .qt\appPersonalPlus_qml.txt
 
-build .qt/appPersonalPlus_qml.txt | ${cmake_ninja_workdir}.qt/appPersonalPlus_qml.txt: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Qml/Qt6QmlCopyFiles.cmake C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml
+build .qt/appPersonalPlus_qml.txt | ${cmake_ninja_workdir}.qt/appPersonalPlus_qml.txt: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Qml/Qt6QmlCopyFiles.cmake C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug && C:\Qt\Tools\CMake_64\bin\cmake.exe -DFILES_INFO_PATH=C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/appPersonalPlus_qml.cmake -P C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Qml/Qt6QmlCopyFiles.cmake"
   DESC = Copying appPersonalPlus qml sources into build dir
   restat = 1
@@ -459,7 +476,7 @@ build CMakeFiles/module_appPersonalPlus_aotstats_target | ${cmake_ninja_workdir}
 #############################################
 # Custom command for .rcc\qmlcache\module_appPersonalPlus.aotstats
 
-build .rcc/qmlcache/module_appPersonalPlus.aotstats | ${cmake_ninja_workdir}.rcc/qmlcache/module_appPersonalPlus.aotstats: CUSTOM_COMMAND .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/module_appPersonalPlus.aotstatslist || appPersonalPlus_qmltyperegistration
+build .rcc/qmlcache/module_appPersonalPlus.aotstats | ${cmake_ninja_workdir}.rcc/qmlcache/module_appPersonalPlus.aotstats: CUSTOM_COMMAND .rcc/qmlcache/appPersonalPlus_Main_qml.cpp.aotstats .rcc/qmlcache/appPersonalPlus_login_qml.cpp.aotstats .rcc/qmlcache/module_appPersonalPlus.aotstatslist || appPersonalPlus_qmltyperegistration
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmlaotstats.exe aggregate C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/module_appPersonalPlus.aotstatslist C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/module_appPersonalPlus.aotstats"
   DESC = Generating .rcc/qmlcache/module_appPersonalPlus.aotstats
   restat = 1
@@ -490,7 +507,7 @@ build CMakeFiles/appPersonalPlus_qmlimportscan | ${cmake_ninja_workdir}CMakeFile
 #############################################
 # Custom command for .qt\qml_imports\appPersonalPlus_build.cmake
 
-build .qt/qml_imports/appPersonalPlus_build.cmake | ${cmake_ninja_workdir}.qt/qml_imports/appPersonalPlus_build.cmake: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmlimportscanner.exe .qt/rcc/qmake_PersonalPlus.qrc .qt/rcc/appPersonalPlus_raw_qml_0.qrc .qt/rcc/appPersonalPlus_raw_res_0.qrc C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml
+build .qt/qml_imports/appPersonalPlus_build.cmake | ${cmake_ninja_workdir}.qt/qml_imports/appPersonalPlus_build.cmake: CUSTOM_COMMAND C$:/Qt/6.10.1/mingw_64/bin/qmlimportscanner.exe .qt/rcc/qmake_PersonalPlus.qrc .qt/rcc/appPersonalPlus_raw_qml_0.qrc .qt/rcc/appPersonalPlus_raw_res_0.qrc C$:/Users/leggrjames/Documents/PersonalPlus/Main.qml C$:/Users/leggrjames/Documents/PersonalPlus/login.qml
   COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\leggrjames\Documents\PersonalPlus && C:\Users\leggrjames\Documents\PersonalPlus\build\Desktop_Qt_6_10_1_MinGW_64_bit-Debug\.qt\bin\qt_setup_tool_path.bat C:/Qt/6.10.1/mingw_64/bin/qmlimportscanner.exe @C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appPersonalPlus_build.rsp"
   DESC = Running qmlimportscanner for appPersonalPlus
   restat = 1

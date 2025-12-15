@@ -5,8 +5,7 @@
 		"commands" : 
 		[
 			"add_custom_target",
-			"_qt_internal_deferred_aotstats_setup",
-			"add_dependencies"
+			"_qt_internal_deferred_aotstats_setup"
 		],
 		"files" : 
 		[
@@ -33,13 +32,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 1245,
-				"parent" : 2
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 1250,
+				"line" : 1306,
 				"parent" : 2
 			}
 		]
@@ -47,16 +40,11 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 4,
-			"id" : "appPersonalPlus_qmltyperegistration::@6890427a1f51a3e7e1df"
+			"id" : "module_appPersonalPlus_aotstats_target::@6890427a1f51a3e7e1df"
 		}
 	],
-	"folder" : 
-	{
-		"name" : "QtInternalTargets"
-	},
-	"id" : "module_appPersonalPlus_aotstats_target::@6890427a1f51a3e7e1df",
-	"name" : "module_appPersonalPlus_aotstats_target",
+	"id" : "all_aotstats::@6890427a1f51a3e7e1df",
+	"name" : "all_aotstats",
 	"paths" : 
 	{
 		"build" : ".",
@@ -78,7 +66,9 @@
 				1,
 				2,
 				3,
-				4
+				4,
+				5,
+				6
 			]
 		}
 	],
@@ -87,13 +77,19 @@
 		{
 			"backtrace" : 3,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/module_appPersonalPlus_aotstats_target",
+			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/all_aotstats",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/module_appPersonalPlus_aotstats_target.rule",
+			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/all_aotstats.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/all_aotstats.aotstats.rule",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -106,6 +102,12 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_Main_qml.cpp.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.rcc/qmlcache/appPersonalPlus_login_qml.cpp.rule",
 			"sourceGroupIndex" : 1
 		},
 		{

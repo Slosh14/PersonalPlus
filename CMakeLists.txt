@@ -17,6 +17,7 @@ qt_add_qml_module(appPersonalPlus
     QML_FILES
         Main.qml
         RESOURCES resources/fonts.qrc
+        QML_FILES login.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
