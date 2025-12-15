@@ -777,6 +777,7 @@ appPersonalPlus_autogen/timestamp: \
 	C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	C:/Users/leggrjames/Documents/PersonalPlus/main.cpp \
+	C:/Users/leggrjames/Documents/PersonalPlus/resources/buttons.qrc \
 	C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts.qrc \
 	C:/Users/leggrjames/Documents/PersonalPlus/resources/images.qrc \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

@@ -4781,6 +4781,9 @@
 		},
 		{
 			"path" : "resources/images.qrc"
+		},
+		{
+			"path" : "resources/buttons.qrc"
 		}
 	],
 	"kind" : "cmakeFiles",

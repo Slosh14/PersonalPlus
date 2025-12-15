@@ -19,7 +19,7 @@ Item {
         y: 0
         width: 540
         height: 1080
-        color: "#ffffff" // Example color, change as needed
+        color: "#ffffff"
         z: 1  // Ensure it's above the base rectangle
 
         //Sign in header
@@ -31,71 +31,179 @@ Item {
             font.weight: Font.Bold
             color: "black"
             anchors.horizontalCenter: parent.horizontalCenter
-            y: 260       // your chosen vertical position
+            y: 260
         }
 
-        TextField {
-            id: usernameField
+        // Username Field
+        Rectangle {
             width: 430
             height: 63
-            placeholderText: "username"
+            color: "#f0f0f0"
+            border.color: "#969696"
+            border.width: 1
+            radius: 5
             anchors.horizontalCenter: parent.horizontalCenter
             y: 375
-            font.family: "Nexa-Trial"
-            font.pointSize: 18
-            font.weight: Font.Light
-            color: "#b4b4b4"          // applies to both typed text and placeholder
 
-            // Custom background
-            background: Rectangle {
-                color: "#f0f0f0"          // background color of the TextField
-                border.color: "#969696"   // border color
-                border.width: 2           // adjust thickness if needed
-                radius: 5                 // optional: rounded corners
-            }
-
-            // Explicitly style the placeholder text
+            TextField {
+                id: usernameField
+                anchors.fill: parent
+                anchors.margins: 5
+                placeholderText: "username"
+                font.family: "Nexa-Trial"
+                font.pointSize: 18
+                font.weight: Font.Light
+                color: "#b4b4b4"
                 leftPadding: 22
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
+                background: null
+            }
         }
 
-        TextField {
-            id: passwordField
+        // Password Field
+        Rectangle {
             width: 430
             height: 63
-            placeholderText: "password"
+            color: "#f0f0f0"
+            border.color: "#969696"
+            border.width: 1
+            radius: 5
             anchors.horizontalCenter: parent.horizontalCenter
             y: 465
-            font.family: "Nexa-Trial"
-            font.pointSize: 18
-            font.weight: Font.Light
-            color: "#b4b4b4"          // applies to both typed text and placeholder
 
-            // Custom background
-            background: Rectangle {
-                color: "#f0f0f0"          // background color of the TextField
-                border.color: "#969696"   // border color
-                border.width: 2           // adjust thickness if needed
-                radius: 5                 // optional: rounded corners
-            }
-
-            // Explicitly style the placeholder text
+            TextField {
+                id: passwordField
+                anchors.fill: parent
+                anchors.margins: 5
+                placeholderText: "password"
+                font.family: "Nexa-Trial"
+                font.pointSize: 18
+                font.weight: Font.Light
+                color: "#b4b4b4"
                 leftPadding: 22
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
+                background: null
+            }
         }
 
-        Image {
+        // Check button with label, images aligned left, only images clickable
+        Rectangle {
+            x: 55
+            y: 552
+            width: 130
+            height: 24
+            color: "transparent"
+
+            // Checkbox images
+            Item {
+                id: rememberMeButton
+                width: 24
+                height: 24
+                anchors.verticalCenter: parent.verticalCenter
+                property bool checked: false
+
+                // Unticked image
+                Image {
+                    id: untickedImage
+                    source: "qrc:/buttons/rememberMeUnticked.svg"
+                    visible: !rememberMeButton.checked
+                    width: 24
+                    height: 24
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: rememberMeButton.checked = !rememberMeButton.checked
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+
+                // Ticked image
+                Image {
+                    id: tickedImage
+                    source: "qrc:/buttons/rememberMeTicked.svg"
+                    visible: rememberMeButton.checked
+                    width: 24
+                    height: 24
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: rememberMeButton.checked = !rememberMeButton.checked
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+            }
+
+            // Label
+            Text {
+                id: rememberMe
+                text: "Remember me."
+                font.family: "Nexa-Trial"
+                font.pointSize: 12
+                font.weight: Font.Normal
+                color: "black"
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: rememberMeButton.right
+                anchors.leftMargin: 11
+            }
+        }
+
+        // Login button
+        Item {
             id: loginButton
-            source: "qrc:/images/loginButton.svg"
+            width: 66
+            height: 66
             anchors.horizontalCenter: parent.horizontalCenter
             y: 650
 
-        }
+            property bool hovered: false
 
+            // Default image
+            Image {
+                id: loginDefault
+                anchors.fill: parent
+                source: "qrc:/buttons/loginButton.svg"
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                opacity: loginButton.hovered ? 0 : 1
+
+                Behavior on opacity {
+                    NumberAnimation { duration: 200 }
+                }
+            }
+
+            // Hovered image
+            Image {
+                id: loginHover
+                anchors.fill: parent
+                source: "qrc:/buttons/loginButtonHover.svg"
+                fillMode: Image.PreserveAspectFit
+                smooth: true
+                opacity: loginButton.hovered ? 1 : 0
+
+                Behavior on opacity {
+                    NumberAnimation { duration: 200 }
+                }
+            }
+
+            HoverHandler {
+                onHoveredChanged: loginButton.hovered = hovered
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: console.log("Login clicked")
+            }
+        }
     }
 
+    // Right background
     Image {
         id: loginBackground
         source: "qrc:/images/loginBackground.jpg"
@@ -107,10 +215,7 @@ Item {
         Image {
             id: logoMain
             source: "qrc:/images/logoMain.svg"
-            x: 900
-            y: 200
             anchors.centerIn: parent
         }
     }
-
 }

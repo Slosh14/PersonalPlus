@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>buttons/loginButton.svg</file>
+        <file>buttons/loginButtonHover.svg</file>
+        <file>buttons/rememberMeUnticked.svg</file>
+        <file>buttons/rememberMeTicked.svg</file>
+    </qresource>
+</RCC>

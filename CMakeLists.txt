@@ -27,6 +27,7 @@ qt_add_qml_module(appPersonalPlus
     RESOURCES
         resources/fonts.qrc
         RESOURCES resources/images.qrc
+        RESOURCES resources/buttons.qrc
 
 )
 
