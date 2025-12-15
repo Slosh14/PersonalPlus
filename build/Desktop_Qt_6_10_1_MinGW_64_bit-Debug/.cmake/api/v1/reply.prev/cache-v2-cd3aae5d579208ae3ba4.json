@@ -6714,6 +6714,18 @@
 			"value" : "C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Quick"
 		},
 		{
+			"name" : "Qt6Svg_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6Svg."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Svg"
+		},
+		{
 			"name" : "Qt6_DIR",
 			"properties" : 
 			[

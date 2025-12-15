@@ -4,7 +4,7 @@ project(PersonalPlus VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ✅ CORRECT variable names (yours were broken)
+# ✅ Enable Qt features
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -26,7 +26,8 @@ qt_add_qml_module(appPersonalPlus
 
     RESOURCES
         resources/fonts.qrc
-        resources/images.qrc
+        RESOURCES resources/images.qrc
+
 )
 
 set_target_properties(appPersonalPlus PROPERTIES
