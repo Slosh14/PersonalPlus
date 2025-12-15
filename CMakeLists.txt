@@ -4,6 +4,11 @@ project(PersonalPlus VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# ✅ CORRECT variable names (yours were broken)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 
 qt_standard_project_setup(REQUIRES 6.8)
@@ -14,19 +19,17 @@ qt_add_executable(appPersonalPlus
 
 qt_add_qml_module(appPersonalPlus
     URI PersonalPlus
+
     QML_FILES
         Main.qml
-        RESOURCES resources/fonts.qrc
-        QML_FILES login.qml
+        login.qml
+
+    RESOURCES
+        resources/fonts.qrc
+        resources/images.qrc
 )
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
 set_target_properties(appPersonalPlus PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appPersonalPlus
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
