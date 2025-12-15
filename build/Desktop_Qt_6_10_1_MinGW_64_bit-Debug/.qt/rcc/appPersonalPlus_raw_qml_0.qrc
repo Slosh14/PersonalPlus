@@ -1,7 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/PersonalPlus/">
-    <file alias="Main.qml">C:/Users/leggrjames/Documents/PersonalPlus/Main.qml</file>
-    <file alias="login.qml">C:/Users/leggrjames/Documents/PersonalPlus/login.qml</file>
-  </qresource>
-</RCC>
-
