@@ -10,7 +10,8 @@
 	"INPUTS" : 
 	[
 		"C:/Users/leggrjames/Documents/PersonalPlus/resources/images/logoMain.svg",
-		"C:/Users/leggrjames/Documents/PersonalPlus/resources/images/loginBackground.jpg"
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/images/loginBackground.jpg",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/images/loginButton.svg"
 	],
 	"LOCK_FILE" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appPersonalPlus_autogen.dir/AutoRcc_images_3YJK5W5UP7_Lock.lock",
 	"MULTI_CONFIG" : false,

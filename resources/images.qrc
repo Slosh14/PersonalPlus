@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>images/loginBackground.jpg</file>
         <file>images/logoMain.svg</file>
+        <file>images/loginButton.svg</file>
     </qresource>
 </RCC>
