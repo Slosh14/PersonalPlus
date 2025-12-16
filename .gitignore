@@ -1,15 +1,21 @@
 # Qt Creator build directories
-build-*/
+/build-*/
+/build/
+
+# CMake build artifacts
+/CMakeFiles/
+/CMakeCache.txt
+/cmake-build-*/
 
 # Qt Creator temporary files
 *.autosave
 *.user
-*.user.* 
+*.user.*
 *.pro.user
-*.pro.user.* 
+*.pro.user.*
 *.qmake.stash
 
-# Qt/CMake build artifacts
+# Qt generated files
 *.moc
 *.obj
 *.o
@@ -19,7 +25,14 @@ build-*/
 *.exe
 *.log
 *.rcc
+*.qmlc
+*.qmlc.*
+*.qmltypes
 
-# Qt resource files
-*.qrc
+# Qt resource files (allow .qrc in Resources folder)
 !Resources/*.qrc
+
+# Miscellaneous
+Makefile
+*.dir
+*.DS_Store
