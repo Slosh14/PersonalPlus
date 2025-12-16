@@ -1,0 +1,15 @@
+-rootPath
+C:/Users/leggrjames/Documents/PersonalPlus
+-cmake-output
+-output-file
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appPersonalPlus_build.cmake
+-importPath
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/PersonalPlus
+-importPath
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug
+-importPath
+C:/Qt/6.10.1/mingw_64/qml
+-qrcFiles
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qmake_PersonalPlus.qrc
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_qml_0.qrc
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_res_0.qrc

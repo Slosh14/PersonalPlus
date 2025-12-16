@@ -1,0 +1,55 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                        {
+                            "codegenResult": 2,
+                            "column": 19,
+                            "durationMicroseconds": 0,
+                            "functionName": "minimumWidth",
+                            "line": 12,
+                            "message": "Could not find property \"minimumWidth\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 19,
+                            "durationMicroseconds": 0,
+                            "functionName": "maximumWidth",
+                            "line": 13,
+                            "message": "Could not find property \"maximumWidth\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 20,
+                            "durationMicroseconds": 0,
+                            "functionName": "minimumHeight",
+                            "line": 14,
+                            "message": "Could not find property \"minimumHeight\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 20,
+                            "durationMicroseconds": 0,
+                            "functionName": "maximumHeight",
+                            "line": 15,
+                            "message": "Could not find property \"maximumHeight\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 23,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 19,
+                            "message": "Could not find property \"fill\"."
+                        }
+                    ],
+                    "filePath": "C:/Users/leggrjames/Documents/PersonalPlus/Main.qml"
+                }
+            ],
+            "moduleId": "PersonalPlus(appPersonalPlus)"
+        }
+    ]
+}

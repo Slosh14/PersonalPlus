@@ -1,22 +1,17 @@
 <RCC>
     <qresource prefix="/fonts">
-        <file>fonts/nexa-trial-black.otf</file>
-        <file>fonts/nexa-trial-blackitalic.otf</file>
-        <file>fonts/nexa-trial-bold.otf</file>
-        <file>fonts/nexa-trial-bolditalic.otf</file>
-        <file>fonts/nexa-trial-book.otf</file>
-        <file>fonts/nexa-trial-bookitalic.otf</file>
-        <file>fonts/nexa-trial-extrabold.otf</file>
-        <file>fonts/nexa-trial-extrabolditalic.otf</file>
-        <file>fonts/nexa-trial-extralight.otf</file>
-        <file>fonts/nexa-trial-extralightitalic.otf</file>
-        <file>fonts/nexa-trial-heavy.otf</file>
-        <file>fonts/nexa-trial-heavyitalic.otf</file>
-        <file>fonts/nexa-trial-light.otf</file>
-        <file>fonts/nexa-trial-lightitalic.otf</file>
-        <file>fonts/nexa-trial-regular.otf</file>
-        <file>fonts/nexa-trial-regularitalic.otf</file>
-        <file>fonts/nexa-trial-thin.otf</file>
-        <file>fonts/nexa-trial-thinitalic.otf</file>
+        <file>fonts/Nexa-Black.ttf</file>
+        <file>fonts/Nexa-BlackItalic.ttf</file>
+        <file>fonts/Nexa-Bold.ttf</file>
+        <file>fonts/Nexa-BoldItalic.ttf</file>
+        <file>fonts/Nexa-Book.ttf</file>
+        <file>fonts/Nexa-BookItalic.ttf</file>
+        <file>fonts/Nexa-Heavy.ttf</file>
+        <file>fonts/Nexa-HeavyItalic.ttf</file>
+        <file>fonts/Nexa-Italic.ttf</file>
+        <file>fonts/Nexa-Light.ttf</file>
+        <file>fonts/Nexa-LightItalic.ttf</file>
+        <file>fonts/Nexa-Regular.ttf</file>
+        <file>fonts/Nexa-Thin.ttf</file>
     </qresource>
 </RCC>

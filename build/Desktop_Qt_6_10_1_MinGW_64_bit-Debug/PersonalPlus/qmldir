@@ -1,0 +1,6 @@
+module PersonalPlus
+typeinfo appPersonalPlus.qmltypes
+prefer :/qt/qml/PersonalPlus/
+Main 254.0 Main.qml
+depends QtQuick
+

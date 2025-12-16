@@ -1,0 +1,37 @@
+{
+	"BUILD_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appPersonalPlus_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus",
+	"CMAKE_SOURCE_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appPersonalPlus_autogen/include",
+	"INPUTS" : 
+	[
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Book.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Bold.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Black.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Light.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-BoldItalic.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-HeavyItalic.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Heavy.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Italic.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Thin.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-BookItalic.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-Regular.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-BlackItalic.ttf",
+		"C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts/Nexa-LightItalic.ttf"
+	],
+	"LOCK_FILE" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appPersonalPlus_autogen.dir/AutoRcc_fonts_3YJK5W5UP7_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "fonts" ],
+	"OUTPUT_CHECKSUM" : "3YJK5W5UP7",
+	"OUTPUT_NAME" : "qrc_fonts.cpp",
+	"RCC_EXECUTABLE" : "C:/Qt/6.10.1/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appPersonalPlus_autogen.dir/AutoRcc_fonts_3YJK5W5UP7_Used.txt",
+	"SOURCE" : "C:/Users/leggrjames/Documents/PersonalPlus/resources/fonts.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}

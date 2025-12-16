@@ -1,0 +1,423 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                        {
+                            "codegenResult": 0,
+                            "column": 23,
+                            "durationMicroseconds": 154,
+                            "functionName": "fill",
+                            "line": 11,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 47,
+                            "functionName": "weight",
+                            "line": 31,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 50,
+                            "functionName": "horizontalCenter",
+                            "line": 33,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 41,
+                            "functionName": "horizontalCenter",
+                            "line": 45,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 59,
+                            "message": "Could not find property \"verticalAlignment\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 50,
+                            "message": "Could not find property \"fill\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "weight",
+                            "line": 55,
+                            "message": "Could not find property \"weight\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 40,
+                            "functionName": "horizontalCenter",
+                            "line": 72,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 36,
+                            "durationMicroseconds": 0,
+                            "functionName": "verticalAlignment",
+                            "line": 86,
+                            "message": "Could not find property \"verticalAlignment\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 31,
+                            "durationMicroseconds": 0,
+                            "functionName": "fill",
+                            "line": 77,
+                            "message": "Could not find property \"fill\"."
+                        },
+                        {
+                            "codegenResult": 2,
+                            "column": 30,
+                            "durationMicroseconds": 0,
+                            "functionName": "weight",
+                            "line": 82,
+                            "message": "Could not find property \"weight\"."
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 97,
+                            "functionName": "onCheckedChanged",
+                            "line": 101,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 46,
+                            "functionName": "visible",
+                            "line": 107,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 37,
+                            "functionName": "fill",
+                            "line": 110,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 77,
+                            "functionName": "onClicked",
+                            "line": 114,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 34,
+                            "durationMicroseconds": 30,
+                            "functionName": "cursorShape",
+                            "line": 115,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 17,
+                            "functionName": "fill",
+                            "line": 113,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 31,
+                            "functionName": "visible",
+                            "line": 123,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 17,
+                            "functionName": "fill",
+                            "line": 126,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 32,
+                            "durationMicroseconds": 65,
+                            "functionName": "onClicked",
+                            "line": 130,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 34,
+                            "durationMicroseconds": 26,
+                            "functionName": "cursorShape",
+                            "line": 131,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 16,
+                            "functionName": "fill",
+                            "line": 129,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 16,
+                            "durationMicroseconds": 87,
+                            "functionName": "x",
+                            "line": 144,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 16,
+                            "durationMicroseconds": 92,
+                            "functionName": "y",
+                            "line": 145,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 28,
+                            "functionName": "weight",
+                            "line": 142,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 35,
+                            "functionName": "horizontalCenter",
+                            "line": 153,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 20,
+                            "functionName": "fillMode",
+                            "line": 163,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 75,
+                            "functionName": "opacity",
+                            "line": 165,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 18,
+                            "functionName": "fill",
+                            "line": 161,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 27,
+                            "durationMicroseconds": 22,
+                            "functionName": "fillMode",
+                            "line": 177,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 81,
+                            "functionName": "opacity",
+                            "line": 179,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 46,
+                            "functionName": "fill",
+                            "line": 175,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 66,
+                            "functionName": "onHoveredChanged",
+                            "line": 187,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 31,
+                            "functionName": "cursorShape",
+                            "line": 192,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 28,
+                            "durationMicroseconds": 49,
+                            "functionName": "onClicked",
+                            "line": 193,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 22,
+                            "functionName": "fill",
+                            "line": 191,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 20,
+                            "durationMicroseconds": 41,
+                            "functionName": "width",
+                            "line": 202,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 21,
+                            "durationMicroseconds": 47,
+                            "functionName": "height",
+                            "line": 203,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 23,
+                            "functionName": "cursorShape",
+                            "line": 204,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 24,
+                            "durationMicroseconds": 44,
+                            "functionName": "onClicked",
+                            "line": 206,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 36,
+                            "functionName": "horizontalCenter",
+                            "line": 200,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 23,
+                            "functionName": "weight",
+                            "line": 213,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 20,
+                            "functionName": "centerIn",
+                            "line": 215,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 20,
+                            "durationMicroseconds": 42,
+                            "functionName": "width",
+                            "line": 224,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 21,
+                            "durationMicroseconds": 45,
+                            "functionName": "height",
+                            "line": 225,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 26,
+                            "durationMicroseconds": 22,
+                            "functionName": "cursorShape",
+                            "line": 226,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 24,
+                            "durationMicroseconds": 42,
+                            "functionName": "onClicked",
+                            "line": 228,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 39,
+                            "durationMicroseconds": 39,
+                            "functionName": "horizontalCenter",
+                            "line": 222,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 30,
+                            "durationMicroseconds": 49,
+                            "functionName": "weight",
+                            "line": 235,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 35,
+                            "durationMicroseconds": 17,
+                            "functionName": "centerIn",
+                            "line": 237,
+                            "message": ""
+                        },
+                        {
+                            "codegenResult": 0,
+                            "column": 31,
+                            "durationMicroseconds": 16,
+                            "functionName": "centerIn",
+                            "line": 254,
+                            "message": ""
+                        }
+                    ],
+                    "filePath": "C:/Users/leggrjames/Documents/PersonalPlus/login.qml"
+                }
+            ],
+            "moduleId": "PersonalPlus(appPersonalPlus)"
+        }
+    ]
+}

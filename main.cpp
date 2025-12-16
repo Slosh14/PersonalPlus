@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+
     // Load all Nexa-Trial fonts from the .qrc resource
     QFontDatabase::addApplicationFont(":/fonts/nexa-trial-black.otf");
     QFontDatabase::addApplicationFont(":/fonts/nexa-trial-blackitalic.otf");

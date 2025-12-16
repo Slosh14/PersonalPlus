@@ -1,0 +1,8 @@
+--resource
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qmake_PersonalPlus.qrc
+--resource
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_qml_0.qrc
+--resource
+C:/Users/leggrjames/Documents/PersonalPlus/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appPersonalPlus_raw_res_0.qrc
+/qt/qml/PersonalPlus/Main.qml
+/qt/qml/PersonalPlus/login.qml
