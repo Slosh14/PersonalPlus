@@ -8,7 +8,8 @@ build-*/
 *.pro.user
 *.pro.user.* 
 *.qmake.stash
-*.qrc
+
+# Qt/CMake build artifacts
 *.moc
 *.obj
 *.o
@@ -17,4 +18,8 @@ build-*/
 *.dll
 *.exe
 *.log
+*.rcc
+
+# Qt resource files
+*.qrc
 !Resources/*.qrc
