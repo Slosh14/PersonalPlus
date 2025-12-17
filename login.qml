@@ -7,6 +7,17 @@ Item {
     width: 1920
     height: 1080
 
+    // Initialize login fields based on last signed-in user
+    Component.onCompleted: {
+        var lastUser = DatabaseManager.getLastSignedInUser()
+        if (lastUser.staySignedIn) {
+            usernameField.text = lastUser.username
+            staySignedInButton.checked = true
+        }
+    }
+
+
+
     // Base white background
     Rectangle {
         anchors.fill: parent
@@ -180,21 +191,20 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
+                // Handle login button click
                 onClicked: {
-                    console.log("Login clicked")
-                    console.log("Username:", usernameField.text)
-                    console.log("Password:", passwordField.text)
-                    console.log("Stay signed in:", staySignedInButton.checked)
-
-                    // OLD: DatabaseManager.validateUser(usernameField.text, passwordField.text, staySigned)
-                    // NEW:
+                    // Validate user credentials
                     var result = DatabaseManager.validateUserWithStay(usernameField.text, passwordField.text)
                     if (result.success) {
-                        console.log("Login successful! Stay signed in:", result.staySignedIn)
+                        console.log("Login successful! Stay signed in:", staySignedInButton.checked)
+
+                        // Update the stay_signed_in flag in the database based on checkbox
+                        DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
                     } else {
                         console.log("Login failed!")
                     }
                 }
+
             }
         }
 

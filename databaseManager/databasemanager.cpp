@@ -109,3 +109,58 @@ QVariantMap DatabaseManager::validateUserWithStay(const QString &username, const
 
     return result;
 }
+
+// QML-callable function to update the 'stay_signed_in' flag for a user
+bool DatabaseManager::updateStaySignedIn(const QString &username, bool stay_signed_in)
+{
+    // Check if the database is open
+    if (!m_db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return false;
+    }
+
+    QSqlQuery query;
+
+    // Prepare an UPDATE SQL statement to change stay_signed_in for the given username
+    query.prepare("UPDATE users SET stay_signed_in = :stay_signed_in WHERE username = :username");
+    query.bindValue(":stay_signed_in", stay_signed_in ? 1 : 0); // Convert bool to integer
+    query.bindValue(":username", username); // Bind the username
+
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Failed to update stay_signed_in:" << query.lastError().text();
+        return false;
+    }
+
+    qDebug() << "stay_signed_in updated successfully for user:" << username;
+    return true; // Return true on success
+}
+
+// Return the last user who chose "stay signed in"
+QVariantMap DatabaseManager::getLastSignedInUser()
+{
+    QVariantMap result;
+    result["username"] = "";
+    result["staySignedIn"] = false;
+
+    if (!m_db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return result;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT username, stay_signed_in FROM users WHERE stay_signed_in = 1 LIMIT 1");
+
+    if (!query.exec()) {
+        qDebug() << "Failed to query last signed-in user:" << query.lastError().text();
+        return result;
+    }
+
+    if (query.next()) {
+        result["username"] = query.value("username").toString();
+        result["staySignedIn"] = query.value("stay_signed_in").toInt() != 0;
+    }
+
+    return result;
+}
+

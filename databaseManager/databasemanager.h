@@ -22,6 +22,13 @@ public:
     // Updated QML-callable validateUser
     Q_INVOKABLE QVariantMap validateUserWithStay(const QString &username, const QString &password);
 
+    // Updates sign in field
+    Q_INVOKABLE bool updateStaySignedIn(const QString &username, bool stay_signed_in);
+
+    // Get the last signed-in user
+    Q_INVOKABLE QVariantMap getLastSignedInUser();
+
+
 private:
     QSqlDatabase m_db;
     QString m_dbPath;

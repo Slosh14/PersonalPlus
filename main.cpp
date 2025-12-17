@@ -18,13 +18,13 @@ static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEng
         qDebug() << "Failed to open database!";
     }
 
-    // Drop and create tables for testing
+    /* Drop and create tables for testing
     if (!dbManager->dropTables()) {
         qDebug() << "Failed to drop tables!";
     }
     if (!dbManager->createTables()) {
         qDebug() << "Failed to create tables!";
-    }
+    }*/
 
     // Add test user
     if (!dbManager->addUser("testuser", "password123", false)) {
@@ -41,24 +41,22 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     // Load fonts
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-black.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-blackitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-bold.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-bolditalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-book.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-bookitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-extrabold.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-extrabolditalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-extralight.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-extralightitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-heavy.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-heavyitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-light.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-lightitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-regular.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-regularitalic.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-thin.otf");
-    QFontDatabase::addApplicationFont(":/fonts/nexa-trial-thinitalic.otf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Black.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-BlackItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Bold.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-BoldItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Book.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-BookItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Heavy.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-HeavyItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Italic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Light.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-LightItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Regular.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-Thin.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-ThinItalic.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-XBold.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/Nexa-XBoldItalic.ttf");
 
     QQmlApplicationEngine engine;
     QObject::connect(
