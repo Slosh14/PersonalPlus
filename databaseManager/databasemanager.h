@@ -11,7 +11,9 @@ public:
     ~DatabaseManager();
 
     bool openDatabase();
+    bool dropTables(); // <--- added this
     bool createTables();
+    bool addUser(const QString &username, const QString &password, bool stay_signed_in = false);
 
 private:
     QSqlDatabase m_db;
