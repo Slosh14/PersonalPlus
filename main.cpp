@@ -9,38 +9,38 @@
 #include <QDebug>
 #include "databaseManager/DatabaseManager.h"
 
+// Singleton provider function for QML
+static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEngine) {
+    Q_UNUSED(engine)
+    Q_UNUSED(scriptEngine)
+    DatabaseManager* dbManager = new DatabaseManager("personalplus.db");
+    if (!dbManager->openDatabase()) {
+        qDebug() << "Failed to open database!";
+    }
+
+    // Drop and create tables for testing
+    if (!dbManager->dropTables()) {
+        qDebug() << "Failed to drop tables!";
+    }
+    if (!dbManager->createTables()) {
+        qDebug() << "Failed to create tables!";
+    }
+
+    // Add test user
+    if (!dbManager->addUser("testuser", "password123", false)) {
+        qDebug() << "Failed to add test user!";
+    } else {
+        qDebug() << "Test user added!";
+    }
+
+    return dbManager;
+}
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-    DatabaseManager dbManager("personalplus.db");
-
-    if (dbManager.openDatabase()) {
-        qDebug() << "DatabaseManager: Database opened successfully!";
-    } else {
-        qDebug() << "DatabaseManager: Failed to open database!";
-    }
-
-    // Drop tables first to start fresh for testing
-    if (dbManager.dropTables()) {
-        qDebug() << "DatabaseManager: Tables dropped successfully!";
-    } else {
-        qDebug() << "DatabaseManager: Failed to drop tables!";
-    }
-
-    if (dbManager.createTables()) {
-        qDebug() << "DatabaseManager: Table 'users' created successfully!";
-    } else {
-        qDebug() << "DatabaseManager: Failed to create table!";
-    }
-
-    if (dbManager.addUser("testuser", "password123", false)) {
-        qDebug() << "Test user added!";
-    } else {
-        qDebug() << "Failed to add test user!";
-    }
-
-    // Load all Nexa-Trial fonts from the .qrc resource
+    // Load fonts
     QFontDatabase::addApplicationFont(":/fonts/nexa-trial-black.otf");
     QFontDatabase::addApplicationFont(":/fonts/nexa-trial-blackitalic.otf");
     QFontDatabase::addApplicationFont(":/fonts/nexa-trial-bold.otf");
@@ -67,6 +67,9 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+
+    // Register DatabaseManager singleton for QML
+    qmlRegisterSingletonType<DatabaseManager>("App.Database", 1, 0, "DatabaseManager", databaseManagerProvider);
 
     engine.loadFromModule("PersonalPlus", "Main");
 

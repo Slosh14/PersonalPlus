@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import App.Database 1.0
 
 Item {
     id: loginRoot
@@ -90,44 +91,41 @@ Item {
 
         // Checkbox images
         Item {
-            id: rememberMeButton
+            id: staySignedInButton
             width: 24
             height: 24
             x: 55
             y: 552
             property bool checked: false
 
-            // Log the value whenever it changes
-            onCheckedChanged: console.log("Remember Me checked:", checked)
+            onCheckedChanged: console.log("Stay signed in?:", checked)
 
-            // Unticked image
             Image {
                 id: untickedImage
-                source: "qrc:/buttons/rememberMeUnticked.svg"
-                visible: !rememberMeButton.checked
+                source: "qrc:/buttons/staySignedInUnticked.svg"
+                visible: !staySignedInButton.checked
                 width: 24
                 height: 24
                 anchors.fill: parent
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: rememberMeButton.checked = !rememberMeButton.checked
+                    onClicked: staySignedInButton.checked = !staySignedInButton.checked
                     cursorShape: Qt.PointingHandCursor
                 }
             }
 
-            // Ticked image
             Image {
                 id: tickedImage
-                source: "qrc:/buttons/rememberMeTicked.svg"
-                visible: rememberMeButton.checked
+                source: "qrc:/buttons/staySignedInTicked.svg"
+                visible: staySignedInButton.checked
                 width: 24
                 height: 24
                 anchors.fill: parent
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: rememberMeButton.checked = !rememberMeButton.checked
+                    onClicked: staySignedInButton.checked = !staySignedInButton.checked
                     cursorShape: Qt.PointingHandCursor
                 }
             }
@@ -141,8 +139,8 @@ Item {
             font.pointSize: 12
             font.weight: Font.Normal
             color: "black"
-            x: rememberMeButton.x + rememberMeButton.width + 11
-            y: rememberMeButton.y + (rememberMeButton.height - 12)/2  // vertically centered relative to checkbox
+            anchors.verticalCenter: staySignedInButton.verticalCenter
+            x: staySignedInButton.x + staySignedInButton.width + 11
         }
 
         // Login button
@@ -155,7 +153,6 @@ Item {
 
             property bool hovered: false
 
-            // Default image
             Image {
                 id: loginDefault
                 anchors.fill: parent
@@ -164,12 +161,9 @@ Item {
                 smooth: true
                 opacity: loginButton.hovered ? 0 : 1
 
-                Behavior on opacity {
-                    NumberAnimation { duration: 200 }
-                }
+                Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
-            // Hovered image
             Image {
                 id: loginHover
                 anchors.fill: parent
@@ -178,19 +172,29 @@ Item {
                 smooth: true
                 opacity: loginButton.hovered ? 1 : 0
 
-                Behavior on opacity {
-                    NumberAnimation { duration: 200 }
-                }
+                Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
-            HoverHandler {
-                onHoveredChanged: loginButton.hovered = hovered
-            }
+            HoverHandler { onHoveredChanged: loginButton.hovered = hovered }
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: console.log("Login clicked")
+                onClicked: {
+                    console.log("Login clicked")
+                    console.log("Username:", usernameField.text)
+                    console.log("Password:", passwordField.text)
+                    console.log("Stay signed in:", staySignedInButton.checked)
+
+                    // OLD: DatabaseManager.validateUser(usernameField.text, passwordField.text, staySigned)
+                    // NEW:
+                    var result = DatabaseManager.validateUserWithStay(usernameField.text, passwordField.text)
+                    if (result.success) {
+                        console.log("Login successful! Stay signed in:", result.staySignedIn)
+                    } else {
+                        console.log("Login failed!")
+                    }
+                }
             }
         }
 

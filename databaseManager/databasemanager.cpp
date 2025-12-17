@@ -4,8 +4,8 @@
 #include <QSqlError>
 #include <QDebug>
 
-DatabaseManager::DatabaseManager(const QString &path)
-    : m_dbPath(path)
+DatabaseManager::DatabaseManager(const QString &path, QObject *parent)
+    : QObject(parent), m_dbPath(path)
 {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
     m_db.setDatabaseName(m_dbPath);
@@ -78,4 +78,34 @@ bool DatabaseManager::addUser(const QString &username, const QString &password, 
 
     qDebug() << "User added successfully!";
     return true;
+}
+
+// QML-callable: returns { success: true/false, staySignedIn: true/false }
+QVariantMap DatabaseManager::validateUserWithStay(const QString &username, const QString &password)
+{
+    QVariantMap result;
+    result["success"] = false;
+    result["staySignedIn"] = false;
+
+    if (!m_db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return result;
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT stay_signed_in FROM users WHERE username = :username AND password = :password");
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to query user:" << query.lastError().text();
+        return result;
+    }
+
+    if (query.next()) {
+        result["success"] = true;
+        result["staySignedIn"] = query.value("stay_signed_in").toInt() != 0;
+    }
+
+    return result;
 }

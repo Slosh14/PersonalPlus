@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>buttons/loginButton.svg</file>
         <file>buttons/loginButtonHover.svg</file>
-        <file>buttons/rememberMeUnticked.svg</file>
-        <file>buttons/rememberMeTicked.svg</file>
+        <file>buttons/staySignedInTicked.svg</file>
+        <file>buttons/staySignedInUnticked.svg</file>
     </qresource>
 </RCC>
