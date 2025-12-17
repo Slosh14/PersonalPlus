@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick)
+find_package(Qt6 REQUIRED COMPONENTS Quick Sql)
 
 qt_standard_project_setup(REQUIRES 6.8)
 
@@ -28,6 +28,7 @@ qt_add_qml_module(appPersonalPlus
         resources/fonts.qrc
         RESOURCES resources/images.qrc
         RESOURCES resources/buttons.qrc
+        SOURCES databaseManager/databasemanager.h databaseManager/databasemanager.cpp
 
 )
 
@@ -38,6 +39,8 @@ set_target_properties(appPersonalPlus PROPERTIES
 
 target_link_libraries(appPersonalPlus
     PRIVATE Qt6::Quick
+    PRIVATE Qt6::Quick
+    PRIVATE Qt6::Sql
 )
 
 include(GNUInstallDirs)

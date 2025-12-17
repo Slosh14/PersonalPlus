@@ -2,10 +2,32 @@
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
 #include <QObject>
+#include <QCoreApplication>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QDebug>
+#include "databaseManager/DatabaseManager.h"
+
+
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    DatabaseManager dbManager("personalplus.db");
+
+    if (dbManager.openDatabase()) {
+        qDebug() << "DatabaseManager: Database opened successfully!";
+    } else {
+        qDebug() << "DatabaseManager: Failed to open database!";
+    }
+
+    if (dbManager.createTables()) {
+        qDebug() << "DatabaseManager: Table 'users' created successfully!";
+    } else {
+        qDebug() << "DatabaseManager: Failed to create table!";
+    }
 
 
     // Load all Nexa-Trial fonts from the .qrc resource
