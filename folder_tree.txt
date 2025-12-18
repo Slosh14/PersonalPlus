@@ -1,0 +1,51 @@
+Folder PATH listing
+Volume serial number is F448-AD00
+C:.
+¦   .gitignore
+¦   CMakeLists.txt
+¦   createAccount.qml
+¦   folder_tree.txt
+¦   login.qml
+¦   main.cpp
+¦   Main.qml
+¦   
++---.qtcreator
+¦       CMakeLists.txt.user
+¦       
++---databaseManager
+¦       databasemanager.cpp
+¦       databasemanager.h
+¦       
++---resources
+    ¦   buttons.qrc
+    ¦   fonts.qrc
+    ¦   images.qrc
+    ¦   
+    +---buttons
+    ¦       loginButton.svg
+    ¦       loginButtonHover.svg
+    ¦       staySignedInTicked.svg
+    ¦       staySignedInUnticked.svg
+    ¦       
+    +---fonts
+    ¦       Nexa-Black.ttf
+    ¦       Nexa-BlackItalic.ttf
+    ¦       Nexa-Bold.ttf
+    ¦       Nexa-BoldItalic.ttf
+    ¦       Nexa-Book.ttf
+    ¦       Nexa-BookItalic.ttf
+    ¦       Nexa-Heavy.ttf
+    ¦       Nexa-HeavyItalic.ttf
+    ¦       Nexa-Italic.ttf
+    ¦       Nexa-Light.ttf
+    ¦       Nexa-LightItalic.ttf
+    ¦       Nexa-Regular.ttf
+    ¦       Nexa-Thin.ttf
+    ¦       Nexa-ThinItalic.ttf
+    ¦       Nexa-XBold.ttf
+    ¦       Nexa-XBoldItalic.ttf
+    ¦       
+    +---images
+            loginBackground.jpg
+            logoMain.svg
+            

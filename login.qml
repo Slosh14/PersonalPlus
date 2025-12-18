@@ -16,8 +16,6 @@ Item {
         }
     }
 
-
-
     // Base white background
     Rectangle {
         anchors.fill: parent
@@ -191,20 +189,15 @@ Item {
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                // Handle login button click
                 onClicked: {
-                    // Validate user credentials
                     var result = DatabaseManager.validateUserWithStay(usernameField.text, passwordField.text)
                     if (result.success) {
                         console.log("Login successful! Stay signed in:", staySignedInButton.checked)
-
-                        // Update the stay_signed_in flag in the database based on checkbox
                         DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
                     } else {
                         console.log("Login failed!")
                     }
                 }
-
             }
         }
 
@@ -239,7 +232,11 @@ Item {
             height: createAccountText.contentHeight - 10
             cursorShape: Qt.PointingHandCursor
 
-            onClicked: console.log("Create Account link clicked")
+            onClicked: {
+                console.log("CREATE ACCOUNT link clicked")
+                createAccountLoader.source = "createAccount.qml"
+                createAccountLoader.visible = true
+            }
 
             Text {
                 id: createAccountText
@@ -251,6 +248,15 @@ Item {
                 anchors.centerIn: parent
             }
         }
+    }
+
+    // Loader for Create Account panel
+    Loader {
+        id: createAccountLoader
+        anchors.fill: parent
+        source: ""
+        visible: false
+        z: 2
     }
 
     // Right background
