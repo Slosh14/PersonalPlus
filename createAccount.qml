@@ -7,6 +7,9 @@ Item {
     height: 1080
     z: 1  // Ensure it's above other items
 
+    property Item loginPanelRef
+    property Loader loaderRef
+
     Rectangle {
         width: 540
         height: 1080
@@ -24,7 +27,11 @@ Item {
 
             onClicked: {
                 console.log("ALREADY HAVE AN ACCOUNT link clicked")
+                loaderRef.source = ""
+                loginPanelRef.visible = true
+                console.log("Back button executed: createAccountPanel unloaded, loginPanel visible")
             }
+
 
             Text {
                 id: alreadyHaveAnAccountText
@@ -41,4 +48,9 @@ Item {
     Component.onCompleted: {
         console.log("createAccountPanel loaded")
     }
+
+    Component.onDestruction: {
+        console.log("createAccountPanel destroyed")
+    }
+
 }

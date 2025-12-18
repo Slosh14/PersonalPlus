@@ -234,9 +234,20 @@ Item {
 
             onClicked: {
                 console.log("CREATE ACCOUNT link clicked")
+                // Hide the login panel
+                loginPanel.visible = false
+                // Load the create account panel
                 createAccountLoader.source = "createAccount.qml"
                 createAccountLoader.visible = true
+
+                // Pass references after the item is fully loaded
+                if (createAccountLoader.item) {
+                    createAccountLoader.item.loginPanelRef = loginPanel
+                    createAccountLoader.item.loaderRef = createAccountLoader
+                    console.log("createAccountPanel references set")
+                }
             }
+
 
             Text {
                 id: createAccountText
@@ -257,6 +268,8 @@ Item {
         source: ""
         visible: false
         z: 2
+
+        property Item loginPanelRef: loginPanel
     }
 
     // Right background
