@@ -69,6 +69,23 @@ bool DatabaseManager::addUser(const QString &username, const QString &password, 
         return false;
     }
 
+    // Check if username or email already exists
+    QSqlQuery checkQuery;
+    checkQuery.prepare("SELECT COUNT(*) FROM users WHERE username = :username OR email = :email");
+    checkQuery.bindValue(":username", username);
+    checkQuery.bindValue(":email", email);
+
+    if (!checkQuery.exec()) {
+        qDebug() << "Failed to check for existing user:" << checkQuery.lastError().text();
+        return false;
+    }
+
+    if (checkQuery.next() && checkQuery.value(0).toInt() > 0) {
+        qDebug() << "Username or email already exists!";
+        return false;
+    }
+
+
     QSqlQuery query;
     query.prepare("INSERT INTO users (username, password, email, stay_signed_in) VALUES (:username, :password, :email, :stay_signed_in)");
     query.bindValue(":username", username);

@@ -269,8 +269,9 @@ Item {
                         loaderRef.source = ""
                         loginPanelRef.visible = true
                     } else {
-                        console.log("Failed to create user")
+                        console.log("Failed to create user. Username or email may already exist.")
                     }
+
                 }
             }
         }
