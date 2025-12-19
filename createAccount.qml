@@ -8,7 +8,71 @@ Item {
     height: 1080
     x: 0
     y: 0
-    z: 1  // Ensure it's above other items
+    z: 1
+
+    function validatePassword(password) {
+        console.log("Validating password")
+
+        // Length check
+        if (password.length < 12 || password.length > 128) {
+            console.log("Password must be 12–128 chars")
+            return false
+        }
+
+        // Complexity checks
+        let uppercase = /[A-Z]/.test(password)
+        let lowercase = /[a-z]/.test(password)
+        let number = /[0-9]/.test(password)
+        let specialChar = /[!@#$%^&*(),.?\":{}|<>]/.test(password)
+
+        if (!uppercase || !lowercase) {
+            console.log("Include upper & lower case letters")
+            return false
+        }
+        if (!number) {
+            console.log("Include at least one number")
+            return false
+        }
+        if (!specialChar) {
+            console.log("Include at least one special char")
+            return false
+        }
+
+        // Sequential chars (3 in a row)
+        let seq = "abcdefghijklmnopqrstuvwxyz0123456789"
+        let lowerPassword = password.toLowerCase()
+        let hasSequential = false
+        for (let j = 0; j <= lowerPassword.length - 3; j++) {
+            if (seq.includes(lowerPassword.substr(j, 3))) {
+                hasSequential = true
+                break
+            }
+        }
+
+        // Repeated chars (3 consecutive)
+        let hasRepeated = false
+        for (let k = 0; k <= password.length - 3; k++) {
+            if (password[k] === password[k + 1] && password[k] === password[k + 2]) {
+                hasRepeated = true
+                break
+            }
+        }
+
+        if (hasSequential || hasRepeated) {
+            console.log("Password fails sequence/repeat check")
+            return false
+        }
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email)
+        }
+
+        console.log("Password OK")
+        return true
+    }
+
+
 
     property Item loginPanelRef
     property Loader loaderRef
@@ -352,26 +416,50 @@ Item {
                 onClicked: {
                     var username = createUsernameField.text
                     var password = createPasswordField.text
+                    var confirm = confirmPasswordField.text
                     var email = enterEmailAddressField.text
 
-                    if (username === "" || password === "" || email === "") {
-                        console.log("Please fill all fields before signing up")
+                    if (!username || !password || !confirm || !email) {
+                        console.log("Fill all fields")
                         return
                     }
 
-                    console.log("Attempting to add user with:", "Username:", username, "Password:", password, "Email:", email)
-
-                    var success = DatabaseManager.addUser(username, password, email, false)
-                    if (success) {
-                        console.log("User created successfully:", username, email)
-                        loaderRef.source = ""
-                        loginPanelRef.visible = true
-                    } else {
-                        console.log("Failed to create user. Username or email may already exist.")
+                    // Email validation with standard TLDs
+                    function validateEmail(email) {
+                        var tlds = ["com","org","net","edu","gov","mil","int","info","biz","io","co","us","uk","ca","de","fr","jp","au","cn","ru","br","in","xyz","online","tech","site","store","blog","app"];
+                        var re = new RegExp("^[^\\s@]+@[^\\s@]+\\.(" + tlds.join("|") + ")$", "i");
+                        if (!re.test(email)) {
+                            console.log("Email invalid")
+                            return false
+                        }
+                        return true
                     }
 
+                    if (!validateEmail(email)) {
+                        return
+                    }
+
+                    if (password !== confirm) {
+                        console.log("Passwords do not match")
+                        return
+                    }
+
+                    if (!validatePassword(password)) {
+                        console.log("Password invalid")
+                        return
+                    }
+
+                    var success = DatabaseManager.addUser(username, password, email, false)
+                    console.log(success ? "User created" : "Signup failed")
+                    if (success) {
+                        loaderRef.source = ""
+                        loginPanelRef.visible = true
+                    }
                 }
             }
+
+
+
         }
 
 
