@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import App.Database 1.0
 
 Item {
     id: createAccountPanel
@@ -221,47 +222,59 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             y: 723
 
-
             property bool hovered: false
 
             Image {
-                id: loginDefault
+                id: signUpDefault
                 anchors.fill: parent
                 source: "qrc:/buttons/signUpButton.svg"
                 fillMode: Image.PreserveAspectFit
                 smooth: true
-                opacity: loginButton.hovered ? 0 : 1
+                opacity: signUpButton.hovered ? 0 : 1
 
                 Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
             Image {
-                id: loginHover
+                id: signUpHover
                 anchors.fill: parent
                 source: "qrc:/buttons/signUpButtonHover.svg"
                 fillMode: Image.PreserveAspectFit
                 smooth: true
-                opacity: loginButton.hovered ? 1 : 0
+                opacity: signUpButton.hovered ? 1 : 0
 
                 Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
-            HoverHandler { onHoveredChanged: loginButton.hovered = hovered }
+            HoverHandler { onHoveredChanged: signUpButton.hovered = hovered }
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
-                    var result = DatabaseManager.validateUserWithStay(usernameField.text, passwordField.text)
-                    if (result.success) {
-                        console.log("Login successful! Stay signed in:", staySignedInButton.checked)
-                        DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
+                    var username = createUsernameField.text
+                    var password = createPasswordField.text
+                    var email = enterEmailAddressField.text
+
+                    if (username === "" || password === "" || email === "") {
+                        console.log("Please fill all fields before signing up")
+                        return
+                    }
+
+                    console.log("Attempting to add user with:", "Username:", username, "Password:", password, "Email:", email)
+
+                    var success = DatabaseManager.addUser(username, password, email, false)
+                    if (success) {
+                        console.log("User created successfully:", username, email)
+                        loaderRef.source = ""
+                        loginPanelRef.visible = true
                     } else {
-                        console.log("Login failed!")
+                        console.log("Failed to create user")
                     }
                 }
             }
         }
+
 
         // TOS & PP label
         Text {
