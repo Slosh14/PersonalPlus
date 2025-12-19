@@ -65,13 +65,14 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
             }
         }
 
-        // Password Field
+        // Password Field with circular toggle
         Rectangle {
             width: 430
             height: 63
@@ -92,11 +93,62 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
             }
+
+            // <<< ADDED: Ensure password starts hidden when component loads
+            Component.onCompleted: {
+                passwordField.echoMode = TextInput.Password
+                console.log("Initial password visibility: HIDDEN")
+            }
+
+            // Circular toggle button
+            Rectangle {
+                id: togglePasswordVisibility
+                width: 30
+                height: 19
+                color: "transparent"
+                radius: 15         // makes it a circle
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 22
+                border.color: "black"
+                border.width: 0
+
+                Image {
+                    id: toggleIconPWL
+                    anchors.centerIn: parent
+                    width: 30
+                    height: 19
+                    source: passwordField.echoMode === TextInput.Password
+                            ? "qrc:/icons/eyeClosed.svg"
+                            : "qrc:/icons/eyeOpen.svg"
+                    fillMode: Image.PreserveAspectFit
+                    // SVG icon reflects password visibility state
+                }
+
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (passwordField.echoMode === TextInput.Password) {
+                            passwordField.echoMode = TextInput.Normal
+                        } else {
+                            passwordField.echoMode = TextInput.Password
+                        }
+                        console.log(
+                            "Password visibility:",
+                            passwordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE"
+                        )
+                    }
+                }
+            }
         }
+
 
         // Checkbox images
         Item {

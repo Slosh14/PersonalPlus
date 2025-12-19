@@ -6,7 +6,7 @@ ApplicationWindow {
     width: 1920
     height: 1080
     visible: true
-    title: qsTr("PersonalPlus")
+    title: qsTr("Personal Plus")
 
     // Lock window size completely
     minimumWidth: width

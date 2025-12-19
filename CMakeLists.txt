@@ -30,6 +30,7 @@ qt_add_qml_module(appPersonalPlus
         RESOURCES resources/buttons.qrc
         SOURCES databaseManager/databasemanager.h databaseManager/databasemanager.cpp
         QML_FILES createAccount.qml
+        RESOURCES resources/icons.qrc
 
 )
 

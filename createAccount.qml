@@ -91,6 +91,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
@@ -130,9 +131,57 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
+            }
+
+            Component.onCompleted: {
+                createPasswordField.echoMode = TextInput.Password
+            }
+
+            // Circular toggle button
+            Rectangle {
+                id: toggleCreatePasswordVisibility
+                width: 30
+                height: 19
+                color: "transparent"
+                radius: 15         // makes it a circle
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 22
+                border.color: "black"
+                border.width: 0
+
+                Image {
+                    id: toggleIconCPW
+                    anchors.centerIn: parent
+                    width: 30
+                    height: 19
+                    source: createPasswordField.echoMode === TextInput.Password
+                            ? "qrc:/icons/eyeClosed.svg"
+                            : "qrc:/icons/eyeOpen.svg"
+                    fillMode: Image.PreserveAspectFit
+                    // SVG icon reflects password visibility state
+                }
+
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (createPasswordField.echoMode === TextInput.Password) {
+                            createPasswordField.echoMode = TextInput.Normal
+                        } else {
+                            createPasswordField.echoMode = TextInput.Password
+                        }
+                        console.log(
+                            "Password visibility:",
+                            createPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE"
+                        )
+                    }
+                }
             }
         }
 
@@ -169,9 +218,57 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
+            }
+
+            Component.onCompleted: {
+                confirmPasswordField.echoMode = TextInput.Password
+            }
+
+            // Circular toggle button
+            Rectangle {
+                id: toggleConfirmPasswordVisibility
+                width: 30
+                height: 19
+                color: "transparent"
+                radius: 15         // makes it a circle
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 22
+                border.color: "black"
+                border.width: 0
+
+                Image {
+                    id: toggleIconCNFPW
+                    anchors.centerIn: parent
+                    width: 30
+                    height: 19
+                    source: confirmPasswordField.echoMode === TextInput.Password
+                            ? "qrc:/icons/eyeClosed.svg"
+                            : "qrc:/icons/eyeOpen.svg"
+                    fillMode: Image.PreserveAspectFit
+                    // SVG icon reflects password visibility state
+                }
+
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        if (confirmPasswordField.echoMode === TextInput.Password) {
+                            confirmPasswordField.echoMode = TextInput.Normal
+                        } else {
+                            confirmPasswordField.echoMode = TextInput.Password
+                        }
+                        console.log(
+                            "Password visibility:",
+                            confirmPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE"
+                        )
+                    }
+                }
             }
         }
 
@@ -208,6 +305,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
+                rightPadding: 65   // leave space for toggle circle
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
