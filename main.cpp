@@ -18,20 +18,21 @@ static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEng
         qDebug() << "Failed to open database!";
     }
 
-    /* Drop and create tables for testing
+    // Drop and create tables for testing
     if (!dbManager->dropTables()) {
         qDebug() << "Failed to drop tables!";
     }
     if (!dbManager->createTables()) {
         qDebug() << "Failed to create tables!";
-    }*/
+    }
 
-    // Add test user
-    if (!dbManager->addUser("testuser", "password123", false)) {
+    // Add test user with email
+    if (!dbManager->addUser("testuser", "password123", "testuser@example.com", false)) {
         qDebug() << "Failed to add test user!";
     } else {
-        qDebug() << "Test user added!";
+        qDebug() << "Test user added with email!";
     }
+
 
     return dbManager;
 }

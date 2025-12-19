@@ -17,7 +17,7 @@ public:
     Q_INVOKABLE bool openDatabase();
     Q_INVOKABLE bool dropTables();
     Q_INVOKABLE bool createTables();
-    Q_INVOKABLE bool addUser(const QString &username, const QString &password, bool stay_signed_in = false);
+    Q_INVOKABLE bool addUser(const QString &username, const QString &password, const QString &email, bool stay_signed_in = false);
 
     // Updated QML-callable validateUser
     Q_INVOKABLE QVariantMap validateUserWithStay(const QString &username, const QString &password);
