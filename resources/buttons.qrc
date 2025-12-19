@@ -4,5 +4,7 @@
         <file>buttons/loginButtonHover.svg</file>
         <file>buttons/staySignedInTicked.svg</file>
         <file>buttons/staySignedInUnticked.svg</file>
+        <file>buttons/signUpButton.svg</file>
+        <file>buttons/signUpButtonHover.svg</file>
     </qresource>
 </RCC>
