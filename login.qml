@@ -149,7 +149,6 @@ Item {
             }
         }
 
-
         // Checkbox images
         Item {
             id: staySignedInButton
@@ -243,15 +242,51 @@ Item {
                 cursorShape: Qt.PointingHandCursor
                 onClicked: {
                     var result = DatabaseManager.validateUserWithStay(usernameField.text, passwordField.text)
+
+                    if (result.locked) {
+                        loginErrorText.text = "Maximum attempts exceeded. Account locked"
+                        loginErrorText.visible = true
+                        console.log("Account locked - cannot login for user:", usernameField.text)
+                        return
+                    }
+
                     if (result.success) {
-                        console.log("Login successful! Stay signed in:", staySignedInButton.checked)
+                        loginErrorText.visible = false
+                        console.log("Login successful - error message hidden for user:", usernameField.text)
                         DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
+                        console.log("Login successful! Stay signed in:", staySignedInButton.checked)
+                        console.log("Failed attempts reset to 0 for user:", usernameField.text)
                     } else {
-                        console.log("Login failed!")
+                        loginErrorText.text = "Invalid username or password"
+                        loginErrorText.visible = true
+                        console.log("Login failed - error message displayed for user:", usernameField.text)
+                        console.log("Failed attempts incremented for user:", usernameField.text)
                     }
                 }
             }
+
         }
+
+        Rectangle {
+            id: loginErrorContainer
+            width: 500
+            height: 177
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: loginButton.y + loginButton.height + 15
+
+            Text {
+                id: loginErrorText
+                text: "Invalid username or password"
+                visible: false
+                color: "#a32e58"
+                font.family: "Nexa"
+                font.weight: Font.Normal
+                font.pointSize: 12
+                anchors.centerIn: parent
+            }
+        }
+
+
 
         // "CAN'T SIGN IN?" link
         MouseArea {
