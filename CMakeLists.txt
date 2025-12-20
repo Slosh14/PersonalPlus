@@ -21,7 +21,7 @@ qt_add_qml_module(appPersonalPlus
     URI PersonalPlus
 
     QML_FILES
-        Main.qml
+
         login.qml
 
     RESOURCES
@@ -31,6 +31,9 @@ qt_add_qml_module(appPersonalPlus
         SOURCES databaseManager/databasemanager.h databaseManager/databasemanager.cpp
         QML_FILES createAccount.qml
         RESOURCES resources/icons.qrc
+        QML_FILES appRoot.qml
+        RESOURCES qml.qrc
+        QML_FILES home.qml
 
 )
 

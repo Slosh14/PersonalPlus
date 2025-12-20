@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     // Register DatabaseManager singleton for QML
     qmlRegisterSingletonType<DatabaseManager>("App.Database", 1, 0, "DatabaseManager", databaseManagerProvider);
 
-    engine.loadFromModule("PersonalPlus", "Main");
+    engine.load(QUrl(QStringLiteral("qrc:/appRoot.qml")));
 
     return app.exec();
 }

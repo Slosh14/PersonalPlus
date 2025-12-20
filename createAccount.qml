@@ -84,33 +84,6 @@ Item {
             y: 120
         }
 
-        // "CREATE ACCOUNT" link
-        MouseArea {
-            id: alreadyHaveAnAccount
-            anchors.horizontalCenter: parent.horizontalCenter
-            y: 945
-            width: alreadyHaveAnAccountText.contentWidth
-            height: alreadyHaveAnAccountText.contentHeight - 10
-            cursorShape: Qt.PointingHandCursor
-
-            onClicked: {
-                console.log("ALREADY HAVE AN ACCOUNT link clicked")
-                loaderRef.source = ""
-                loginPanelRef.visible = true
-                console.log("Back button executed: createAccountPanel unloaded, loginPanel visible")
-            }
-
-            Text {
-                id: alreadyHaveAnAccountText
-                text: "ALREADY HAVE AN ACCOUNT"
-                font.family: "Nexa"
-                font.pointSize: 14
-                font.weight: Font.Bold
-                color: "#28a0ae"
-                anchors.centerIn: parent
-            }
-        }
-
         // Create Username Label
         Text {
             id: createUsernameLabel
@@ -421,9 +394,15 @@ Item {
                     var success = DatabaseManager.addUser(username, password, email, false)
                     console.log(success ? "User created" : "Signup failed")
                     if (success) {
-                        loaderRef.source = ""
+                        if (loaderRef && loaderRef.item) {
+                            console.log("Unloading createAccountPanel item:", loaderRef.item)
+                        }
+
+                        loaderRef.source = ""           // unloads createAccountPanel
                         loginPanelRef.visible = true
+                        console.log("Account created, createAccountPanel unloaded, loginPanel visible")
                     }
+
                 }
             }
         }
@@ -474,6 +453,38 @@ Item {
 
             onLinkActivated: function(link) {
                 console.log(link, "clicked")
+            }
+        }
+
+        // "Already have account" link
+        MouseArea {
+            id: alreadyHaveAnAccount
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: 945
+            width: alreadyHaveAnAccountText.contentWidth
+            height: alreadyHaveAnAccountText.contentHeight - 10
+            cursorShape: Qt.PointingHandCursor
+
+            onClicked: {
+                console.log("ALREADY HAVE AN ACCOUNT link clicked")
+
+                if (loaderRef && loaderRef.item) {
+                    console.log("Unloading createAccountPanel item:", loaderRef.item)
+                }
+
+                loaderRef.source = ""           // unloads createAccountPanel
+                loginPanelRef.visible = true
+            }
+
+
+            Text {
+                id: alreadyHaveAnAccountText
+                text: "ALREADY HAVE AN ACCOUNT"
+                font.family: "Nexa"
+                font.pointSize: 14
+                font.weight: Font.Bold
+                color: "#28a0ae"
+                anchors.centerIn: parent
             }
         }
 

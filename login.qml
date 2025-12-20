@@ -7,14 +7,26 @@ Item {
     width: 1920
     height: 1080
 
-    // Initialize login fields based on last signed-in user
+    property Loader loaderRef   // <-- add this here
+
     Component.onCompleted: {
-        var lastUser = DatabaseManager.getLastSignedInUser()
-        if (lastUser.staySignedIn) {
-            usernameField.text = lastUser.username
-            staySignedInButton.checked = true
+            if (!loaderRef) {
+                // Assign loaderRef directly from parent loader
+                loaderRef = Qt.binding(function() { return parent; })
+                console.log("loaderRef assigned in login.qml:", loaderRef)
+            }
+
+            var lastUser = DatabaseManager.getLastSignedInUser()
+            if (lastUser.staySignedIn) {
+                usernameField.text = lastUser.username
+                staySignedInButton.checked = true
+            }
         }
-    }
+
+        Component.onDestruction: {
+            console.log("login.qml destroyed:", loginRoot)
+        }
+
 
     // Base white background
     Rectangle {
@@ -256,6 +268,24 @@ Item {
                         DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
                         console.log("Login successful! Stay signed in:", staySignedInButton.checked)
                         console.log("Failed attempts reset to 0 for user:", usernameField.text)
+
+                        if (loaderRef) {
+                            console.log("Switching to home.qml via loaderRef")
+
+                            // Log the actual item being destroyed
+                            if (loaderRef.item) {
+                                console.log("Unloading login.qml item:", loaderRef.item)
+                            }
+
+                            // Load home.qml fresh
+                            loaderRef.setSource("home.qml")  // newer QML API ensures proper destruction
+
+                            console.log("home.qml loaded")
+                        } else {
+                            console.error("loaderRef is not set! Cannot switch to home.qml")
+                        }
+
+
                     } else {
                         loginErrorText.text = "Invalid username or password"
                         loginErrorText.visible = true
@@ -263,6 +293,7 @@ Item {
                         console.log("Failed attempts incremented for user:", usernameField.text)
                     }
                 }
+
             }
 
         }
@@ -321,19 +352,19 @@ Item {
 
             onClicked: {
                 console.log("CREATE ACCOUNT link clicked")
-                // Hide the login panel
                 loginPanel.visible = false
-                // Load the create account panel
-                createAccountLoader.source = "createAccount.qml"
-                createAccountLoader.visible = true
+                loginRoot.loaderRef = createAccountLoader   // <-- assign loaderRef
+                loginRoot.loaderRef.source = "createAccount.qml"
+                loginRoot.loaderRef.visible = true
 
                 // Pass references after the item is fully loaded
-                if (createAccountLoader.item) {
-                    createAccountLoader.item.loginPanelRef = loginPanel
-                    createAccountLoader.item.loaderRef = createAccountLoader
+                if (loginRoot.loaderRef.item) {
+                    loginRoot.loaderRef.item.loginPanelRef = loginPanel
+                    loginRoot.loaderRef.item.loaderRef = loginRoot.loaderRef
                     console.log("createAccountPanel references set")
                 }
             }
+
 
 
             Text {
