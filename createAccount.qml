@@ -15,7 +15,7 @@ Item {
 
         // Length check
         if (password.length < 12 || password.length > 128) {
-            console.log("Password must be 12–128 chars")
+            createAccountErrorText.text = "Password must be between 12–128 characters"
             return false
         }
 
@@ -26,15 +26,11 @@ Item {
         let specialChar = /[!@#$%^&*(),.?\":{}|<>]/.test(password)
 
         if (!uppercase || !lowercase) {
-            console.log("Include upper & lower case letters")
+            createAccountErrorText.text = "Password requires both\nuppercase and lowercase letters"
             return false
         }
-        if (!number) {
-            console.log("Include at least one number")
-            return false
-        }
-        if (!specialChar) {
-            console.log("Include at least one special char")
+        if (!number || !specialChar) {
+            createAccountErrorText.text = "Password requires at least\none number and one special character"
             return false
         }
 
@@ -59,20 +55,14 @@ Item {
         }
 
         if (hasSequential || hasRepeated) {
-            console.log("Password fails sequence/repeat check")
+            createAccountErrorText.text = "Password fails complexity\ncontains sequential or repeated characters"
             return false
         }
 
-        function validateEmail(email) {
-            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email)
-        }
-
+        createAccountErrorText.text = ""  // clear previous error if password is valid
         console.log("Password OK")
         return true
     }
-
-
 
     property Item loginPanelRef
     property Loader loaderRef
@@ -109,7 +99,6 @@ Item {
                 loginPanelRef.visible = true
                 console.log("Back button executed: createAccountPanel unloaded, loginPanel visible")
             }
-
 
             Text {
                 id: alreadyHaveAnAccountText
@@ -155,7 +144,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
-                rightPadding: 65   // leave space for toggle circle
+                rightPadding: 65
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
@@ -195,7 +184,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
-                rightPadding: 65   // leave space for toggle circle
+                rightPadding: 65
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
@@ -211,12 +200,10 @@ Item {
                 width: 30
                 height: 19
                 color: "transparent"
-                radius: 15         // makes it a circle
+                radius: 15
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: 22
-                border.color: "black"
-                border.width: 0
 
                 Image {
                     id: toggleIconCPW
@@ -227,23 +214,16 @@ Item {
                             ? "qrc:/icons/eyeClosed.svg"
                             : "qrc:/icons/eyeOpen.svg"
                     fillMode: Image.PreserveAspectFit
-                    // SVG icon reflects password visibility state
                 }
-
 
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if (createPasswordField.echoMode === TextInput.Password) {
-                            createPasswordField.echoMode = TextInput.Normal
-                        } else {
-                            createPasswordField.echoMode = TextInput.Password
-                        }
-                        console.log(
-                            "Password visibility:",
-                            createPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE"
-                        )
+                        createPasswordField.echoMode = createPasswordField.echoMode === TextInput.Password
+                            ? TextInput.Normal
+                            : TextInput.Password
+                        console.log("Password visibility:", createPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE")
                     }
                 }
             }
@@ -261,7 +241,7 @@ Item {
             y: 415
         }
 
-        // Create Password Field
+        // Confirm Password Field
         Rectangle {
             width: 430
             height: 63
@@ -282,7 +262,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
-                rightPadding: 65   // leave space for toggle circle
+                rightPadding: 65
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
@@ -292,18 +272,15 @@ Item {
                 confirmPasswordField.echoMode = TextInput.Password
             }
 
-            // Circular toggle button
             Rectangle {
                 id: toggleConfirmPasswordVisibility
                 width: 30
                 height: 19
                 color: "transparent"
-                radius: 15         // makes it a circle
+                radius: 15
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.right: parent.right
                 anchors.rightMargin: 22
-                border.color: "black"
-                border.width: 0
 
                 Image {
                     id: toggleIconCNFPW
@@ -314,23 +291,16 @@ Item {
                             ? "qrc:/icons/eyeClosed.svg"
                             : "qrc:/icons/eyeOpen.svg"
                     fillMode: Image.PreserveAspectFit
-                    // SVG icon reflects password visibility state
                 }
-
 
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        if (confirmPasswordField.echoMode === TextInput.Password) {
-                            confirmPasswordField.echoMode = TextInput.Normal
-                        } else {
-                            confirmPasswordField.echoMode = TextInput.Password
-                        }
-                        console.log(
-                            "Password visibility:",
-                            confirmPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE"
-                        )
+                        confirmPasswordField.echoMode = confirmPasswordField.echoMode === TextInput.Password
+                            ? TextInput.Normal
+                            : TextInput.Password
+                        console.log("Password visibility:", confirmPasswordField.echoMode === TextInput.Password ? "HIDDEN" : "VISIBLE")
                     }
                 }
             }
@@ -369,7 +339,7 @@ Item {
                 font.weight: Font.Light
                 color: "#b4b4b4"
                 leftPadding: 22
-                rightPadding: 65   // leave space for toggle circle
+                rightPadding: 65
                 palette.placeholderText: "#b4b4b4"
                 verticalAlignment: Text.AlignVCenter
                 background: null
@@ -383,7 +353,6 @@ Item {
             height: 66
             anchors.horizontalCenter: parent.horizontalCenter
             y: 723
-
             property bool hovered: false
 
             Image {
@@ -393,7 +362,6 @@ Item {
                 fillMode: Image.PreserveAspectFit
                 smooth: true
                 opacity: signUpButton.hovered ? 0 : 1
-
                 Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
@@ -404,7 +372,6 @@ Item {
                 fillMode: Image.PreserveAspectFit
                 smooth: true
                 opacity: signUpButton.hovered ? 1 : 0
-
                 Behavior on opacity { NumberAnimation { duration: 200 } }
             }
 
@@ -419,27 +386,29 @@ Item {
                     var confirm = confirmPasswordField.text
                     var email = enterEmailAddressField.text
 
+                    createAccountErrorText.text = ""  // clear previous errors
+
                     if (!username || !password || !confirm || !email) {
+                        createAccountErrorText.text = "Fill all fields"
                         console.log("Fill all fields")
                         return
                     }
 
-                    // Email validation with standard TLDs
                     function validateEmail(email) {
                         var tlds = ["com","org","net","edu","gov","mil","int","info","biz","io","co","us","uk","ca","de","fr","jp","au","cn","ru","br","in","xyz","online","tech","site","store","blog","app"];
                         var re = new RegExp("^[^\\s@]+@[^\\s@]+\\.(" + tlds.join("|") + ")$", "i");
                         if (!re.test(email)) {
+                            createAccountErrorText.text = "Email invalid"
                             console.log("Email invalid")
                             return false
                         }
                         return true
                     }
 
-                    if (!validateEmail(email)) {
-                        return
-                    }
+                    if (!validateEmail(email)) return
 
                     if (password !== confirm) {
+                        createAccountErrorText.text = "Passwords do not match"
                         console.log("Passwords do not match")
                         return
                     }
@@ -457,11 +426,29 @@ Item {
                     }
                 }
             }
-
-
-
         }
 
+        // Error message container for Create Account
+        Rectangle {
+            id: createAccountErrorContainer
+            width: 500
+            height: 130
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: signUpButton.y + signUpButton.height + 11
+
+            Text {
+                id: createAccountErrorText
+                text: ""              // dynamically set when validation fails
+                visible: true
+                color: "#a32e58"     // red/pink error color
+                font.family: "Nexa"
+                font.weight: Font.Normal
+                font.pointSize: 12
+                wrapMode: Text.NoWrap
+                horizontalAlignment: Text.AlignHCenter
+                anchors.centerIn: parent
+            }
+        }
 
         // TOS & PP label
         Text {
