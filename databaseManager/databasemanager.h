@@ -25,8 +25,17 @@ public:
     // Updates sign in field
     Q_INVOKABLE bool updateStaySignedIn(const QString &username, bool stay_signed_in);
 
+    // Updates currently_signed_in status for a user
+    Q_INVOKABLE bool setCurrentlySignedIn(const QString &username, bool currentlySignedIn);
+
+    // Returns the username of the currently signed-in user, or empty string if none
+    Q_INVOKABLE QString getCurrentlySignedInUser();
+
     // Get the last signed-in user
     Q_INVOKABLE QVariantMap getLastSignedInUser();
+
+    // Add this inside the DatabaseManager class, under public:
+    Q_INVOKABLE bool signOutUser(const QString &username);
 
 
 private:

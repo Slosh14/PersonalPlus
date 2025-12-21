@@ -48,6 +48,7 @@ bool DatabaseManager::createTables()
             username TEXT NOT NULL,
             password TEXT NOT NULL,
             stay_signed_in INTEGER DEFAULT 0,
+            currently_signed_in INTEGER DEFAULT 0,  -- NEW COLUMN
             email TEXT NOT NULL,
             failed_attempts INTEGER DEFAULT 0,
             locked INTEGER DEFAULT 0
@@ -199,6 +200,52 @@ bool DatabaseManager::updateStaySignedIn(const QString &username, bool stay_sign
     return true; // Return true on success
 }
 
+// Set currently_signed_in for a user
+bool DatabaseManager::setCurrentlySignedIn(const QString &username, bool currentlySignedIn)
+{
+    if (!m_db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return false;
+    }
+
+    QSqlQuery query;
+    query.prepare("UPDATE users SET currently_signed_in = :currently_signed_in WHERE username = :username");
+    query.bindValue(":currently_signed_in", currentlySignedIn ? 1 : 0);
+    query.bindValue(":username", username);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update currently_signed_in:" << query.lastError().text();
+        return false;
+    }
+
+    qDebug() << "currently_signed_in updated successfully for user:" << username << "to" << currentlySignedIn;
+    return true;
+}
+
+QString DatabaseManager::getCurrentlySignedInUser()
+{
+    if (!m_db.isOpen()) {
+        qDebug() << "Database is not open!";
+        return "";
+    }
+
+    QSqlQuery query;
+    query.prepare("SELECT username FROM users WHERE currently_signed_in = 1 LIMIT 1");
+
+    if (!query.exec()) {
+        qDebug() << "Failed to query currently signed-in user:" << query.lastError().text();
+        return "";
+    }
+
+    if (query.next()) {
+        return query.value("username").toString();
+    }
+
+    return "";
+}
+
+
+
 // Return the last user who chose "stay signed in"
 QVariantMap DatabaseManager::getLastSignedInUser()
 {
@@ -225,5 +272,12 @@ QVariantMap DatabaseManager::getLastSignedInUser()
     }
 
     return result;
+}
+
+bool DatabaseManager::signOutUser(const QString &username)
+{
+    // Also set currently_signed_in to false on sign out
+    setCurrentlySignedIn(username, false);
+    return updateStaySignedIn(username, false);
 }
 

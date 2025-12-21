@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
-        <file>createAccount.qml</file>
-        <file>login.qml</file>
-        <file>appRoot.qml</file>
-        <file>home.qml</file>
+        <file>CreateAccount.qml</file>
+        <file>Login.qml</file>
+        <file>AppRoot.qml</file>
+        <file>Home.qml</file>
+        <file>NavBar.qml</file>
     </qresource>
 </RCC>

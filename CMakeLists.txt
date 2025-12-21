@@ -31,9 +31,10 @@ qt_add_qml_module(appPersonalPlus
         SOURCES databaseManager/databasemanager.h databaseManager/databasemanager.cpp
         QML_FILES createAccount.qml
         RESOURCES resources/icons.qrc
-        QML_FILES appRoot.qml
+        QML_FILES AppRoot.qml
         RESOURCES qml.qrc
         QML_FILES home.qml
+        QML_FILES NavBar.qml
 
 )
 

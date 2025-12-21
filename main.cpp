@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QFontDatabase>
 #include <QObject>
 #include <QCoreApplication>
@@ -8,6 +9,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include "databaseManager/DatabaseManager.h"
+#include <QIcon>
 
 // Singleton provider function for QML
 static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEngine) {
@@ -22,6 +24,7 @@ static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEng
     if (!dbManager->dropTables()) {
         qDebug() << "Failed to drop tables!";
     }
+
     if (!dbManager->createTables()) {
         qDebug() << "Failed to create tables!";
     }
@@ -33,13 +36,15 @@ static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEng
         qDebug() << "Test user added with email!";
     }
 
-
     return dbManager;
 }
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    app.setApplicationName("Personal Plus");
+    app.setWindowIcon(QIcon(":/icons/logoIcon256.ico"));
 
     // Load fonts
     QFontDatabase::addApplicationFont(":/fonts/Nexa-Black.ttf");
@@ -70,7 +75,33 @@ int main(int argc, char *argv[])
     // Register DatabaseManager singleton for QML
     qmlRegisterSingletonType<DatabaseManager>("App.Database", 1, 0, "DatabaseManager", databaseManagerProvider);
 
-    engine.load(QUrl(QStringLiteral("qrc:/appRoot.qml")));
+    // Use the singleton instance to check last signed-in user
+    QObject* dbManagerObj = databaseManagerProvider(nullptr, nullptr);
+    DatabaseManager* dbManager = qobject_cast<DatabaseManager*>(dbManagerObj);
+
+    QString autoLoginUsername;
+    bool staySignedIn = false;
+
+    if (dbManager && dbManager->openDatabase()) {
+        QVariantMap lastUser = dbManager->getLastSignedInUser();
+        if (!lastUser["username"].toString().isEmpty() && lastUser["staySignedIn"].toBool()) {
+            autoLoginUsername = lastUser["username"].toString();
+            staySignedIn = true;
+            qDebug() << "Auto-login user detected:" << autoLoginUsername;
+        } else {
+            qDebug() << "No auto-login user found";
+        }
+    } else {
+        qDebug() << "Failed to open database for auto-login check";
+    }
+
+    // Expose the auto-login info to QML
+    engine.rootContext()->setContextProperty("autoLoginUsername", autoLoginUsername);
+    engine.rootContext()->setContextProperty("autoLoginStaySignedIn", staySignedIn);
+
+    // Load AppRoot.qml as normal (ApplicationWindow ensures visible window)
+    engine.load(QUrl(QStringLiteral("qrc:/AppRoot.qml")));
+    qDebug() << "Loaded QML: qrc:/AppRoot.qml";
 
     return app.exec();
 }

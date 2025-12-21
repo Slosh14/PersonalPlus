@@ -266,6 +266,9 @@ Item {
                         loginErrorText.visible = false
                         console.log("Login successful - error message hidden for user:", usernameField.text)
                         DatabaseManager.updateStaySignedIn(usernameField.text, staySignedInButton.checked)
+                        // Set currently_signed_in to true for the logged-in user
+                        DatabaseManager.setCurrentlySignedIn(usernameField.text, true)
+                        console.log("User currently signed in set to TRUE for:", usernameField.text)
                         console.log("Login successful! Stay signed in:", staySignedInButton.checked)
                         console.log("Failed attempts reset to 0 for user:", usernameField.text)
 
@@ -278,7 +281,7 @@ Item {
                             }
 
                             // Load home.qml fresh
-                            loaderRef.setSource("home.qml")  // newer QML API ensures proper destruction
+                            loaderRef.setSource("Home.qml")  // newer QML API ensures proper destruction
 
                             console.log("home.qml loaded")
                         } else {
@@ -354,7 +357,7 @@ Item {
                 console.log("CREATE ACCOUNT link clicked")
                 loginPanel.visible = false
                 loginRoot.loaderRef = createAccountLoader   // <-- assign loaderRef
-                loginRoot.loaderRef.source = "createAccount.qml"
+                loginRoot.loaderRef.source = "CreateAccount.qml"
                 loginRoot.loaderRef.visible = true
 
                 // Pass references after the item is fully loaded
@@ -364,8 +367,6 @@ Item {
                     console.log("createAccountPanel references set")
                 }
             }
-
-
 
             Text {
                 id: createAccountText

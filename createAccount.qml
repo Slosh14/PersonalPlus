@@ -14,8 +14,8 @@ Item {
         console.log("Validating password")
 
         // Length check
-        if (password.length < 12 || password.length > 128) {
-            createAccountErrorText.text = "Password must be between 12–128 characters"
+        if (password.length < 8 || password.length > 128) {
+            createAccountErrorText.text = "Password must be between 8–128 characters"
             return false
         }
 

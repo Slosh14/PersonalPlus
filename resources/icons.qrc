@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>icons/eyeClosed.svg</file>
         <file>icons/eyeOpen.svg</file>
+        <file>icons/navSelectedTasks.svg</file>
+        <file>icons/navUnSelectedTasks.svg</file>
+        <file>icons/navUnSelectedCalendar.svg</file>
+        <file>icons/logoIcon256.ico</file>
     </qresource>
 </RCC>
