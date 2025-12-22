@@ -6,5 +6,16 @@
         <file>icons/navUnSelectedTasks.svg</file>
         <file>icons/navUnSelectedCalendar.svg</file>
         <file>icons/logoIcon256.ico</file>
+        <file>icons/navSelectedCalendar.svg</file>
+        <file>icons/navSelectedFitness.svg</file>
+        <file>icons/navUnSelectedFitness.svg</file>
+        <file>icons/settingCogSelected.svg</file>
+        <file>icons/settingCogUnSelected.svg</file>
+        <file>icons/navHoverCalendar.svg</file>
+        <file>icons/navHoverBudget.svg</file>
+        <file>icons/navHoverFitness.svg</file>
+        <file>icons/navHoverTasks.svg</file>
+        <file>icons/navSelectedBudget.svg</file>
+        <file>icons/navUnSelectedBudget.svg</file>
     </qresource>
 </RCC>

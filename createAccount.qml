@@ -363,7 +363,7 @@ Item {
 
                     if (!username || !password || !confirm || !email) {
                         createAccountErrorText.text = "Fill all fields"
-                        console.log("Fill all fields")
+                        console.log("Please Fill in all fields")
                         return
                     }
 
