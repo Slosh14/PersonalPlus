@@ -45,7 +45,6 @@ Item {
                     anchors.fill: parent
                     anchors.margins: 1
 
-                    // Selected > Hover > Default image priority
                     source: tasksContainer.tasksSelected
                             ? "qrc:/icons/navSelectedTasks.svg"
                             : tasksMouseArea.containsMouse
@@ -60,10 +59,19 @@ Item {
                     cursorShape: Qt.PointingHandCursor
 
                     onClicked: {
+                        // Unload currently loaded item if it exists (instead of destroy)
+                        if (navBar.parent && navBar.parent.contentLoaderRef) {
+                            var loadedItem = navBar.parent.contentLoaderRef.item
+                            if (loadedItem) {
+                                console.log("Unloading loaded item:", loadedItem) // log
+                                navBar.parent.contentLoaderRef.source = ""       // clear the loader
+                            }
+                        }
+
                         tasksContainer.tasksSelected = true
                         calendarContainer.calendarSelected = false
                         fitnessContainer.fitnessSelected = false
-                        budgetContainer.budgetSelected = false  // deselect Budget
+                        budgetContainer.budgetSelected = false
 
                         console.log("Nav selection changed -> Tasks selected")
                     }
@@ -78,9 +86,8 @@ Item {
                 width: 120
                 height: 118
                 color: "transparent"
-                anchors.top: tasksContainer.bottom  // directly below Tasks
+                anchors.top: tasksContainer.bottom
 
-                // Tracks selected state
                 property bool calendarSelected: false
 
                 Image {
@@ -90,7 +97,6 @@ Item {
                     anchors.rightMargin: 1
                     anchors.bottomMargin: 1
 
-                    // Selected > Hover > Default image priority
                     source: calendarContainer.calendarSelected
                             ? "qrc:/icons/navSelectedCalendar.svg"
                             : calendarMouseArea.containsMouse
@@ -105,15 +111,23 @@ Item {
                     cursorShape: Qt.PointingHandCursor
 
                     onClicked: {
+                        // Load Calendar.qml
                         calendarContainer.calendarSelected = true
                         tasksContainer.tasksSelected = false
                         fitnessContainer.fitnessSelected = false
-                        budgetContainer.budgetSelected = false  // deselect Budget
+                        budgetContainer.budgetSelected = false
 
                         console.log("Nav selection changed -> Calendar selected")
-                    }
 
+                        if (navBar.parent && navBar.parent.contentLoaderRef) {
+                            navBar.parent.contentLoaderRef.source = "Calendar.qml"
+                            console.log("Calendar.qml loaded into Home contentLoaderRef")
+                        } else {
+                            console.warn("contentLoaderRef not found in Home.qml")
+                        }
+                    }
                 }
+
             }
 
 
@@ -123,9 +137,8 @@ Item {
                 width: 120
                 height: 118
                 color: "transparent"
-                anchors.top: calendarContainer.bottom  // directly below Calendar
+                anchors.top: calendarContainer.bottom
 
-                // Tracks selected state
                 property bool fitnessSelected: false
 
                 Image {
@@ -135,7 +148,6 @@ Item {
                     anchors.rightMargin: 1
                     anchors.bottomMargin: 1
 
-                    // Selected > Hover > Default image priority
                     source: fitnessContainer.fitnessSelected
                             ? "qrc:/icons/navSelectedFitness.svg"
                             : fitnessMouseArea.containsMouse
@@ -150,10 +162,19 @@ Item {
                     cursorShape: Qt.PointingHandCursor
 
                     onClicked: {
+                        // Unload currently loaded item if it exists
+                        if (navBar.parent && navBar.parent.contentLoaderRef) {
+                            var loadedItem = navBar.parent.contentLoaderRef.item
+                            if (loadedItem) {
+                                console.log("Unloading loaded item:", loadedItem) // log
+                                navBar.parent.contentLoaderRef.source = ""       // clear the loader
+                            }
+                        }
+
                         fitnessContainer.fitnessSelected = true
                         tasksContainer.tasksSelected = false
                         calendarContainer.calendarSelected = false
-                        budgetContainer.budgetSelected = false  // deselect Budget
+                        budgetContainer.budgetSelected = false
 
                         console.log("Nav selection changed -> Fitness selected")
                     }
@@ -167,9 +188,8 @@ Item {
                 width: 120
                 height: 118
                 color: "transparent"
-                anchors.top: fitnessContainer.bottom  // directly below Fitness
+                anchors.top: fitnessContainer.bottom
 
-                // Tracks selected state
                 property bool budgetSelected: false
 
                 Image {
@@ -179,7 +199,6 @@ Item {
                     anchors.rightMargin: 1
                     anchors.bottomMargin: 1
 
-                    // Selected > Hover > Default image priority
                     source: budgetContainer.budgetSelected
                             ? "qrc:/icons/navSelectedBudget.svg"
                             : budgetMouseArea.containsMouse
@@ -194,6 +213,15 @@ Item {
                     cursorShape: Qt.PointingHandCursor
 
                     onClicked: {
+                        // Unload currently loaded item if it exists
+                        if (navBar.parent && navBar.parent.contentLoaderRef) {
+                            var loadedItem = navBar.parent.contentLoaderRef.item
+                            if (loadedItem) {
+                                console.log("Unloading loaded item:", loadedItem) // log
+                                navBar.parent.contentLoaderRef.source = ""       // clear the loader
+                            }
+                        }
+
                         budgetContainer.budgetSelected = true
                         fitnessContainer.fitnessSelected = false
                         tasksContainer.tasksSelected = false
@@ -216,28 +244,22 @@ Item {
             color: "white"
             anchors.bottom: parent.bottom
 
-            // Gray background for Sign Out button
             Rectangle {
                 id: signOutContainer
-                color: "#e6e6e6"  // light gray
+                color: "#e6e6e6"
                 x: 1
                 y: 1
-                width: 77   // fixed width
+                width: 77
                 height: parent.height - 2
 
                 MouseArea {
                     id: signOutLink
-                    anchors.fill: parent      // make the whole gray rectangle clickable
+                    anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
 
-                    onEntered: {
-                        signOutContainer.color = "#d2d2d2"
-                    }
-
-                    onExited: {
-                        signOutContainer.color = "#e6e6e6"
-                    }
+                    onEntered: { signOutContainer.color = "#d2d2d2" }
+                    onExited: { signOutContainer.color = "#e6e6e6" }
 
                     onClicked: {
                         var currentUser = DatabaseManager.getCurrentlySignedInUser()
@@ -251,7 +273,7 @@ Item {
                         autoLoginUsername = ""
                         autoLoginStaySignedIn = false
 
-                        console.log("Sign Out action completed, full gray rect clickable") // test log
+                        console.log("Sign Out action completed, full gray rect clickable")
                         signOutRequested()
                     }
 
@@ -265,48 +287,37 @@ Item {
 
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        anchors.leftMargin: 13   // adjust this value for exact horizontal offset
+                        anchors.leftMargin: 13
                     }
 
                     Component.onCompleted: {
-                        console.log("Sign Out clickable area size:", width, height) // test log
+                        console.log("Sign Out clickable area size:", width, height)
                     }
                 }
             }
 
-
             Rectangle {
                 id: settingCogWheel
-                color: "#e6e6e6"  // initial gray
+                color: "#e6e6e6"
                 x: signOutContainer.x + signOutContainer.width + 1
                 y: 1
                 width: 40
                 height: parent.height - 2
 
-                property bool toggled: false  // tracks image/color state
+                property bool toggled: false
 
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
 
-                    onEntered: {
-                        if (!settingCogWheel.toggled) {
-                            settingCogWheel.color = "#d2d2d2"
-                        }
-                    }
-
-                    onExited: {
-                        if (!settingCogWheel.toggled) {
-                            settingCogWheel.color = "#e6e6e6"
-                        }
-                    }
+                    onEntered: { if (!settingCogWheel.toggled) settingCogWheel.color = "#d2d2d2" }
+                    onExited: { if (!settingCogWheel.toggled) settingCogWheel.color = "#e6e6e6" }
 
                     onClicked: {
                         settingCogWheel.toggled = !settingCogWheel.toggled
-
                         if (settingCogWheel.toggled) {
-                            settingCogWheel.color = "#101b27"
+                            settingCogWheel.color = "#1f3548"
                             centerImage.source = "icons/settingCogSelected.svg"
                         } else {
                             settingCogWheel.color = "#e6e6e6"
@@ -319,16 +330,13 @@ Item {
 
                 Image {
                     id: centerImage
-                    source: "icons/settingCogUnSelected.svg"  // initial image
+                    source: "icons/settingCogUnSelected.svg"
                     anchors.centerIn: parent
                     fillMode: Image.PreserveAspectFit
-                    width: parent.width * 0.6  // scale image to 60% of rect width
+                    width: parent.width * 0.6
                     height: parent.height * 0.6
                 }
             }
-
-
-
 
         }
 

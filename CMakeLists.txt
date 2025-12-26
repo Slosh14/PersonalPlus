@@ -35,6 +35,7 @@ qt_add_qml_module(appPersonalPlus
         RESOURCES qml.qrc
         QML_FILES home.qml
         QML_FILES NavBar.qml
+        QML_FILES Calendar.qml
 
 )
 

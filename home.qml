@@ -7,6 +7,10 @@ Item {
     width: 1920
     height: 1080
 
+    // Expose the content loader to NavBar for dynamic page loading
+        property alias contentLoaderRef: contentLoader
+
+
     // Expose the NavBar to AppRoot for signOutConnections
         property alias navBarRef: nav
 
@@ -18,6 +22,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "#101b27"
+
     }
 
     // Persistent NavBar
@@ -30,6 +35,15 @@ Item {
             console.log("NavBar loaded into Home") // confirm it appears in Home
         }
     }
+
+    Loader {
+        id: contentLoader
+        width: 1800       // width of area next to NavBar
+        height: 1080      // full height of the window
+        source: ""        // initially empty
+    }
+
+
 
     Component.onDestruction: {
         console.log("Home.qml destroyed:", homeRoot)
