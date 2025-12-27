@@ -6,5 +6,8 @@
         <file>Home.qml</file>
         <file>NavBar.qml</file>
         <file>Calendar.qml</file>
+        <file>CalendarMain.qml</file>
+        <file>CalendarOptions.qml</file>
+        <file>CalendarVisual.qml</file>
     </qresource>
 </RCC>
