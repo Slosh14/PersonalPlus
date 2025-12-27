@@ -22,18 +22,18 @@ qt_add_qml_module(appPersonalPlus
 
     QML_FILES
 
-        login.qml
+    Login.qml
 
     RESOURCES
         resources/fonts.qrc
         RESOURCES resources/images.qrc
         RESOURCES resources/buttons.qrc
         SOURCES databaseManager/databasemanager.h databaseManager/databasemanager.cpp
-        QML_FILES createAccount.qml
+        QML_FILES CreateAccount.qml
         RESOURCES resources/icons.qrc
         QML_FILES AppRoot.qml
         RESOURCES qml.qrc
-        QML_FILES home.qml
+        QML_FILES Home.qml
         QML_FILES NavBar.qml
         QML_FILES Calendar.qml
 

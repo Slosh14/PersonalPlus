@@ -6,5 +6,11 @@
         <file>buttons/staySignedInUnticked.svg</file>
         <file>buttons/signUpButton.svg</file>
         <file>buttons/signUpButtonHover.svg</file>
+        <file>buttons/downArrowClicked.svg</file>
+        <file>buttons/downArrowHover.svg</file>
+        <file>buttons/downArrowUnClicked.svg</file>
+        <file>buttons/upArrowClicked.svg</file>
+        <file>buttons/upArrowHover.svg</file>
+        <file>buttons/upArrowUnClicked.svg</file>
     </qresource>
 </RCC>
