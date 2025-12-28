@@ -20,10 +20,10 @@ static QObject* databaseManagerProvider(QQmlEngine *engine, QJSEngine *scriptEng
         qDebug() << "Failed to open database!";
     }
 
-    // Drop and create tables for testing
+    /* Drop and create tables for testing
     if (!dbManager->dropTables()) {
         qDebug() << "Failed to drop tables!";
-    }
+    }*/
 
     if (!dbManager->createTables()) {
         qDebug() << "Failed to create tables!";

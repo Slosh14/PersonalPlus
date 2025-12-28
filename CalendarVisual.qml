@@ -5,13 +5,40 @@ Item {
     width: 300
     height: 309
 
-    // Expose the internal rectangle for safe access from other panels
     property alias visualPanel: calendarVisual
+    property var interactiveElements: []
 
-    // Function to close any open interactive elements
-    function closeInteractions() {
-        yearDropdown.visible = false
-        console.log("Visual panel dropdown closed")
+    function registerInteractiveElement(element) {
+        if (interactiveElements.indexOf(element) === -1) {
+            interactiveElements.push(element)
+            console.log("Registered interactive element:", element)
+        }
+    }
+
+    function closeInteractions(preserve) {
+        for (var i = 0; i < interactiveElements.length; i++) {
+            var element = interactiveElements[i]
+            if (element !== preserve) {
+                element.visible = false
+            }
+        }
+        console.log("Visual panel interactions closed (preserve:", preserve, ")")
+    }
+
+    function activatePanel(preserveDropdown) {
+        calendarVisual.active = true
+        console.log("Panel activated: calendarVisual.active =", calendarVisual.active)
+
+        closeInteractions(preserveDropdown)
+
+        if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
+            calendarRoot.optionsLoader.item.optionsPanel.active = false
+            calendarRoot.optionsLoader.item.closeInteractions()
+        }
+        if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
+            calendarRoot.mainLoader.item.mainPanel.active = false
+            calendarRoot.mainLoader.item.closeInteractions()
+        }
     }
 
     Rectangle {
@@ -21,274 +48,264 @@ Item {
         radius: 5
         border.width: 1
         property bool active: false
-        border.color: {
-            console.log("calendarVisual.active changed to", active)
-            return active ? "#2ca890" : "#485059"
-        }
+        border.color: active ? "#2ca890" : "#485059"
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
-                console.log("Panel clicked: calendarVisual")
-                calendarVisual.active = true
-
-                // Deactivate other panels safely and close their interactions
-                if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                    calendarRoot.optionsLoader.item.optionsPanel.active = false
-                    calendarRoot.optionsLoader.item.closeInteractions()
-                }
-                if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                    calendarRoot.mainLoader.item.mainPanel.active = false
-                    calendarRoot.mainLoader.item.closeInteractions()
-                }
-
-                console.log("Panel updated: calendarVisual.active =", calendarVisual.active)
-            }
+            onClicked: activatePanel(null)
         }
 
         Item {
             anchors.fill: parent
             anchors.margins: 28
 
-            Image {
-                id: upArrowButton
-                source: "buttons/upArrowUnClicked.svg"
-                width: 16
-                height: 16
-                fillMode: Image.PreserveAspectFit
-
-                anchors.verticalCenter: monthYearRow.verticalCenter
-                anchors.right: monthYearRow.left
-                anchors.rightMargin: 10
-
-                MouseArea {
-                    width: 16
-                    height: 13
-                    anchors.centerIn: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
-
-                    onEntered: upArrowButton.source = "buttons/upArrowHover.svg"
-                    onExited: upArrowButton.source = "buttons/upArrowUnClicked.svg"
-
-                    onClicked: {
-                        console.log("Up arrow clicked")
-                        upArrowButton.source = "buttons/upArrowClicked.svg"
-                        calendarVisual.active = true
-                        if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                            calendarRoot.optionsLoader.item.optionsPanel.active = false
-                            calendarRoot.optionsLoader.item.closeInteractions()
-                        }
-                        if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                            calendarRoot.mainLoader.item.mainPanel.active = false
-                            calendarRoot.mainLoader.item.closeInteractions()
-                        }
-                        console.log("Panel updated: calendarVisual.active =", calendarVisual.active)
-                        upArrowClickTimer.start()
-                    }
-                }
-
-                Timer {
-                    id: upArrowClickTimer
-                    interval: 100
-                    repeat: false
-                    onTriggered: {
-                        upArrowButton.source = "buttons/upArrowUnClicked.svg"
-                        console.log("Up arrow reverted to unclicked state")
-                    }
-                }
-            }
-
             Row {
                 id: monthYearRow
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.top: parent.top
+                spacing: 0 // no spacing, each element has its own container
 
-                Text {
-                    id: monthText
-                    text: "September"
-                    font.family: "Nexa"
-                    font.weight: Font.Bold
-                    font.pointSize: 14
-                    color: "#f0f0f0"
+                // LEFT UP ARROW CONTAINER
+                Item {
+                    width: 16
+                    height: 16
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    Rectangle {
-                        anchors.fill: parent
-                        color: "#1f3548"
-                        radius: 4
-                        visible: monthMouse.containsMouse
-                        z: -1
-                    }
+                    Image {
+                        id: upArrowButton
+                        source: "buttons/upArrowUnClicked.svg"
+                        width: 16
+                        height: 16
+                        anchors.centerIn: parent
+                        fillMode: Image.PreserveAspectFit
 
-                    MouseArea {
-                        id: monthMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-
-                        onEntered: console.log("Hover entered: monthText")
-                        onExited: console.log("Hover exited: monthText")
-
-                        onClicked: {
-                            console.log("Text clicked: monthText")
-                            calendarVisual.active = true
-                            if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                                calendarRoot.optionsLoader.item.optionsPanel.active = false
-                                calendarRoot.optionsLoader.item.closeInteractions()
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onEntered: upArrowButton.source = "buttons/upArrowHover.svg"
+                            onExited: upArrowButton.source = "buttons/upArrowUnClicked.svg"
+                            onClicked: {
+                                console.log("Up arrow clicked")
+                                upArrowButton.source = "buttons/upArrowClicked.svg"
+                                activatePanel(null)
+                                upArrowClickTimer.start()
                             }
-                            if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                                calendarRoot.mainLoader.item.mainPanel.active = false
-                                calendarRoot.mainLoader.item.closeInteractions()
+                        }
+
+                        Timer {
+                            id: upArrowClickTimer
+                            interval: 100
+                            repeat: false
+                            onTriggered: {
+                                upArrowButton.source = "buttons/upArrowUnClicked.svg"
+                                console.log("Up arrow reverted to unclicked state")
                             }
-                            console.log("Panel updated: calendarVisual.active =", calendarVisual.active)
                         }
                     }
                 }
 
-                Text {
-                    text: ","
-                    font.family: "Nexa"
-                    font.weight: Font.Bold
-                    font.pointSize: 14
-                    color: "#f0f0f0"
-                    verticalAlignment: Text.AlignVCenter
-                }
-
-                Rectangle { width: 8; height: 1; color: "transparent" }
-
-                Text {
-                    id: yearText
-                    text: "2025"
-                    font.family: "Nexa"
-                    font.weight: Font.Bold
-                    font.pointSize: 14
-                    color: "#f0f0f0"
+                // MONTH CONTAINER
+                Item {
+                    width: monthText.implicitWidth + 5 // reduced 2px
+                    height: monthText.implicitHeight + 6
+                    anchors.verticalCenter: parent.verticalCenter
 
                     Rectangle {
+                        id: monthBox
                         anchors.fill: parent
-                        color: "#1f3548"
+                        color: "#172837"
                         radius: 4
-                        visible: yearMouse.containsMouse
-                        z: -1
-                    }
 
-                    MouseArea {
-                        id: yearMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
+                        Text {
+                            id: monthText
+                            text: "September"
+                            anchors.centerIn: parent
+                            font.family: "Nexa"
+                            font.weight: Font.Bold
+                            font.pointSize: 14
+                            color: "#f0f0f0"
+                        }
 
-                        onEntered: console.log("Hover entered: yearText")
-                        onExited: console.log("Hover exited: yearText")
-
-                        onClicked: {
-                            console.log("Text clicked: yearText")
-                            calendarVisual.active = true
-                            if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                                calendarRoot.optionsLoader.item.optionsPanel.active = false
-                                calendarRoot.optionsLoader.item.closeInteractions()
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                monthDropdown.visible = !monthDropdown.visible
+                                activatePanel(monthDropdown)
                             }
-                            if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                                calendarRoot.mainLoader.item.mainPanel.active = false
-                                calendarRoot.mainLoader.item.closeInteractions()
-                            }
-                            console.log("Panel updated: calendarVisual.active =", calendarVisual.active)
-                            yearDropdown.visible = !yearDropdown.visible
                         }
                     }
+
+                    ListView {
+                        id: monthDropdown
+                        width: parent.width
+                        height: 240
+                        anchors.top: monthBox.bottom
+                        anchors.horizontalCenter: monthBox.horizontalCenter
+                        clip: true
+                        visible: false
+                        model: ["January","February","March","April","May","June","July","August","September","October","November","December"]
+
+                        delegate: Rectangle {
+                            width: parent.width
+                            height: 30
+                            color: "#f0f0f0"
+
+                            Text {
+                                text: modelData
+                                anchors.centerIn: parent
+                                color: "#4b4b4b"
+                                font.family: "Nexa"
+                                font.weight: Font.Light
+                                font.pointSize: 12
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: parent.color = "#d0d0d0"
+                                onExited: parent.color = "#f0f0f0"
+                                onClicked: {
+                                    monthText.text = modelData
+                                    monthDropdown.visible = false
+                                    console.log("Month selected:", modelData)
+                                    activatePanel(null)
+                                }
+                            }
+                        }
+                    }
+
+                    Component.onCompleted: registerInteractiveElement(monthDropdown)
                 }
-            }
 
-            ListView {
-                id: yearDropdown
-                width: 80
-                height: 120
-                x: yearText.mapToItem(calendarVisual, 0, yearText.height).x
-                y: yearText.mapToItem(calendarVisual, 0, yearText.height).y
-                visible: false
-                clip: true
-                model: [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
-
-                delegate: Rectangle {
-                    width: parent.width
-                    height: 30
-                    color: "#1f3548"
-                    border.color: "#485059"
-                    border.width: 1
+                // COMMA CONTAINER
+                Item {
+                    width: 8
+                    height: 16
+                    anchors.verticalCenter: parent.verticalCenter
 
                     Text {
-                        text: modelData
+                        text: ","
                         anchors.centerIn: parent
-                        color: "#f0f0f0"
                         font.family: "Nexa"
-                        font.pointSize: 12
+                        font.weight: Font.Bold
+                        font.pointSize: 14
+                        color: "#f0f0f0"
                     }
+                }
 
-                    MouseArea {
+                // YEAR CONTAINER
+                Item {
+                    width: yearText.implicitWidth + 5 // reduced 2px
+                    height: yearText.implicitHeight + 6
+                    anchors.verticalCenter: parent.verticalCenter
+
+                    Rectangle {
+                        id: yearBox
                         anchors.fill: parent
-                        onClicked: {
-                            yearText.text = modelData
-                            yearDropdown.visible = false
-                            console.log("Year selected:", modelData)
-                            calendarVisual.active = true
-                            if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                                calendarRoot.optionsLoader.item.optionsPanel.active = false
-                                calendarRoot.optionsLoader.item.closeInteractions()
-                            }
-                            if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                                calendarRoot.mainLoader.item.mainPanel.active = false
-                                calendarRoot.mainLoader.item.closeInteractions()
+                        color: "#172837"
+                        radius: 4
+
+                        Text {
+                            id: yearText
+                            text: "2025"
+                            anchors.centerIn: parent
+                            font.family: "Nexa"
+                            font.weight: Font.Bold
+                            font.pointSize: 14
+                            color: "#f0f0f0"
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                yearDropdown.visible = !yearDropdown.visible
+                                activatePanel(yearDropdown)
                             }
                         }
                     }
+
+                    ListView {
+                        id: yearDropdown
+                        width: parent.width
+                        height: 120
+                        anchors.top: yearBox.bottom
+                        anchors.horizontalCenter: yearBox.horizontalCenter
+                        clip: true
+                        visible: false
+                        model: [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
+
+                        delegate: Rectangle {
+                            width: parent.width
+                            height: 30
+                            color: "#f0f0f0"
+
+                            Text {
+                                text: modelData
+                                anchors.centerIn: parent
+                                color: "#4b4b4b"
+                                font.family: "Nexa"
+                                font.weight: Font.Light
+                                font.pointSize: 12
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                onEntered: parent.color = "#d0d0d0"
+                                onExited: parent.color = "#f0f0f0"
+                                onClicked: {
+                                    yearText.text = modelData
+                                    yearDropdown.visible = false
+                                    console.log("Year selected:", modelData)
+                                    activatePanel(null)
+                                }
+                            }
+                        }
+                    }
+
+                    Component.onCompleted: registerInteractiveElement(yearDropdown)
                 }
-            }
 
-            Image {
-                id: downArrowButton
-                source: "buttons/downArrowUnClicked.svg"
-                width: 16
-                height: 16
-                fillMode: Image.PreserveAspectFit
-
-                anchors.verticalCenter: monthYearRow.verticalCenter
-                anchors.left: monthYearRow.right
-                anchors.leftMargin: 10
-
-                MouseArea {
+                // RIGHT DOWN ARROW CONTAINER
+                Item {
                     width: 16
-                    height: 13
-                    anchors.centerIn: parent
-                    hoverEnabled: true
-                    cursorShape: Qt.PointingHandCursor
+                    height: 16
+                    anchors.verticalCenter: parent.verticalCenter
 
-                    onEntered: downArrowButton.source = "buttons/downArrowHover.svg"
-                    onExited: downArrowButton.source = "buttons/downArrowUnClicked.svg"
+                    Image {
+                        id: downArrowButton
+                        source: "buttons/downArrowUnClicked.svg"
+                        width: 16
+                        height: 16
+                        anchors.centerIn: parent
+                        fillMode: Image.PreserveAspectFit
 
-                    onClicked: {
-                        console.log("Down arrow clicked")
-                        downArrowButton.source = "buttons/downArrowClicked.svg"
-                        calendarVisual.active = true
-                        if (calendarRoot.optionsLoader.item && calendarRoot.optionsLoader.item.optionsPanel) {
-                            calendarRoot.optionsLoader.item.optionsPanel.active = false
-                            calendarRoot.optionsLoader.item.closeInteractions()
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onEntered: downArrowButton.source = "buttons/downArrowHover.svg"
+                            onExited: downArrowButton.source = "buttons/downArrowUnClicked.svg"
+                            onClicked: {
+                                console.log("Down arrow clicked")
+                                downArrowButton.source = "buttons/downArrowClicked.svg"
+                                activatePanel(null)
+                                downArrowClickTimer.start()
+                            }
                         }
-                        if (calendarRoot.mainLoader.item && calendarRoot.mainLoader.item.mainPanel) {
-                            calendarRoot.mainLoader.item.mainPanel.active = false
-                            calendarRoot.mainLoader.item.closeInteractions()
-                        }
-                        console.log("Panel updated: calendarVisual.active =", calendarVisual.active)
-                        downArrowClickTimer.start()
-                    }
-                }
 
-                Timer {
-                    id: downArrowClickTimer
-                    interval: 100
-                    repeat: false
-                    onTriggered: {
-                        downArrowButton.source = "buttons/downArrowUnClicked.svg"
-                        console.log("Down arrow reverted to unclicked state")
+                        Timer {
+                            id: downArrowClickTimer
+                            interval: 100
+                            repeat: false
+                            onTriggered: {
+                                downArrowButton.source = "buttons/downArrowUnClicked.svg"
+                                console.log("Down arrow reverted to unclicked state")
+                            }
+                        }
                     }
                 }
             }
