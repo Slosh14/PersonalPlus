@@ -54,7 +54,7 @@ Item {
 
         Rectangle {
             anchors.fill: parent
-            anchors.margins: 28
+            anchors.margins: 20
             color: "#172837"
             radius: 5
         }
@@ -66,7 +66,7 @@ Item {
 
         Item {
             anchors.fill: parent
-            anchors.margins: 28
+            anchors.margins: 20
 
             Row {
                 id: monthYearRow
@@ -257,13 +257,13 @@ Item {
 
             Column {
                 anchors.top: monthYearRow.bottom
-                anchors.topMargin: 15
+                anchors.topMargin: 18
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 10
+                spacing: 13
 
                 Row {
                     id: dayLabelsRow
-                    spacing: 10
+                    spacing: 13
                     anchors.horizontalCenter: parent.horizontalCenter
                     bottomPadding: 5 // adds space below day labels (row 6)
 
@@ -292,7 +292,7 @@ Item {
                     model: 5
                     Row {
                         property int rowIndex: index
-                        spacing: 10
+                        spacing: 13
 
                         Repeater {
                             model: 7
