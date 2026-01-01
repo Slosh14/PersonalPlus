@@ -7,6 +7,8 @@ Item {
 
     property alias visualPanel: calendarVisual
     property var interactiveElements: []
+    property var selectedDayItem: null      // Track which day cell is currently selected
+    property var selectedDayText: null      // Track the selected day's Text item (fixes "color" errors)
 
     function registerInteractiveElement(element) {
         if (interactiveElements.indexOf(element) === -1) {
@@ -50,11 +52,10 @@ Item {
         property bool active: false
         border.color: active ? "#2ca890" : "#485059"
 
-        // Colored 28px margin background
         Rectangle {
             anchors.fill: parent
             anchors.margins: 28
-            color: "#38588c"
+            color: "#172837"
             radius: 5
         }
 
@@ -113,10 +114,8 @@ Item {
                     }
                 }
 
-                // Spacer between arrow and month
                 Item { width: 8; height: monthText.implicitHeight + 6 }
 
-                // MONTH BOX
                 Item {
                     width: monthText.implicitWidth
                     height: monthText.implicitHeight + 6
@@ -143,7 +142,6 @@ Item {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-
                             onEntered: monthText.color = "#d2d2d2"
                             onExited: monthText.color = "#f0f0f0"
                             onClicked: {
@@ -158,7 +156,6 @@ Item {
                     Component.onCompleted: registerInteractiveElement(monthDropdown)
                 }
 
-                // COMMA
                 Item {
                     width: 8
                     height: 16
@@ -173,10 +170,8 @@ Item {
                     }
                 }
 
-                // Spacer between comma and year
                 Item { width: 8; height: 1 }
 
-                // YEAR BOX
                 Item {
                     width: yearText.implicitWidth
                     height: yearText.implicitHeight + 6
@@ -203,7 +198,6 @@ Item {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-
                             onEntered: yearText.color = "#d2d2d2"
                             onExited: yearText.color = "#f0f0f0"
                             onClicked: {
@@ -218,7 +212,6 @@ Item {
                     Component.onCompleted: registerInteractiveElement(yearDropdown)
                 }
 
-                // Spacer to right arrow
                 Item { width: 8; height: yearText.implicitHeight + 6 }
 
                 // RIGHT DOWN ARROW
@@ -262,26 +255,174 @@ Item {
                 }
             }
 
-            // DAY LABELS ROW
-            Row {
-                id: dayLabelsRow
+            Column {
                 anchors.top: monthYearRow.bottom
-                anchors.topMargin: 12
+                anchors.topMargin: 15
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 10
 
-                Text { text: "Mon"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Tue"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Wed"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Thu"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Fri"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Sat"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
-                Text { text: "Sun"; font.family: "Nexa"; font.pointSize: 10.5; color: "#757678" }
+                Row {
+                    id: dayLabelsRow
+                    spacing: 10
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    bottomPadding: 5 // adds space below day labels (row 6)
+
+
+                    Repeater {
+                        model: ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+                        Rectangle {
+                            width: 25
+                            height: 25
+                            color: "#172837"
+                            radius: 3
+
+                            Text {
+                                text: modelData
+                                anchors.centerIn: parent
+                                font.family: "Nexa"
+                                font.weight: Font.Bold
+                                font.pixelSize: 10
+                                color: "#757678"
+                            }
+                        }
+                    }
+                }
+
+                Repeater {
+                    model: 5
+                    Row {
+                        property int rowIndex: index
+                        spacing: 10
+
+                        Repeater {
+                            model: 7
+                            Rectangle {
+                                id: dayCell // Added id so selection tracking is stable (no child index hacks)
+                                width: 25
+                                height: 25
+                                color: "#172837"
+                                radius: 3
+
+                                property int cellIndex: -1
+                                property int dayNumber: 0
+                                property bool isCurrentMonth: false
+
+                                Item {
+                                    anchors.fill: parent
+
+                                    Text {
+                                        id: dayText
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        color: "#f0f0f0"
+                                        font.family: "Nexa"
+                                        font.weight: Font.Bold
+                                        font.pixelSize: 15
+                                    }
+
+                                    Rectangle {
+                                        id: todayUnderline
+                                        anchors.top: dayText.bottom
+                                        anchors.horizontalCenter: dayText.horizontalCenter
+                                        width: 25
+                                        height: 3
+                                        radius: 1
+                                        color: "#28a0ae"
+                                        visible: false
+                                    }
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor // Hand cursor over day numbers/cells
+
+                                    onEntered: {
+                                        // Hover for ALL days, except the active (selected) day
+                                        if (calendarVisualRoot.selectedDayItem !== dayCell) {
+                                            dayText.color = "#d2d2d2" // hover color
+                                        }
+                                    }
+
+
+                                    onExited: {
+                                        // Restore color when hover ends (keep selected color if this is active day)
+                                        if (calendarVisualRoot.selectedDayItem === dayCell) {
+                                            dayText.color = "#28a0ae" // active/selected day
+                                        } else {
+                                            dayText.color = dayCell.isCurrentMonth ? "#ffffff" : "#888888" // normal day colors
+                                        }
+                                    }
+
+                                    onClicked: {
+                                        // Reset previous selected day back to default color
+                                        if (calendarVisualRoot.selectedDayText && calendarVisualRoot.selectedDayItem) {
+                                            calendarVisualRoot.selectedDayText.color =
+                                                calendarVisualRoot.selectedDayItem.isCurrentMonth ? "#ffffff" : "#888888"
+                                        }
+
+                                        // Set new selection
+                                        calendarVisualRoot.selectedDayItem = dayCell
+                                        calendarVisualRoot.selectedDayText = dayText
+                                        dayText.color = "#28a0ae" // Selected color
+
+                                        // Activate the panel like other interactive elements
+                                        activatePanel(null)
+                                    }
+                                }
+
+                                Component.onCompleted: {
+                                    var today = new Date()
+                                    var year = today.getFullYear()
+                                    var month = today.getMonth()
+                                    var firstDay = (new Date(year, month, 1).getDay() + 6) % 7
+                                    var daysInMonth = new Date(year, month + 1, 0).getDate()
+                                    var daysInPrevMonth = new Date(year, month, 0).getDate()
+
+                                    cellIndex = index + (rowIndex * 7)
+                                    var dayNum = 0
+
+                                    if (cellIndex < firstDay) {
+                                        dayNum = daysInPrevMonth - firstDay + cellIndex + 1
+                                        dayText.color = "#888888"
+                                        isCurrentMonth = false
+                                    } else if (cellIndex >= firstDay + daysInMonth) {
+                                        dayNum = cellIndex - firstDay - daysInMonth + 1
+                                        dayText.color = "#888888"
+                                        isCurrentMonth = false
+                                    } else {
+                                        dayNum = cellIndex - firstDay + 1
+                                        dayText.color = "#ffffff"
+                                        isCurrentMonth = true
+
+                                        if (dayNum === today.getDate()) {
+                                            todayUnderline.visible = true
+                                        }
+
+                                        if (isCurrentMonth && dayNum === new Date().getDate()) {
+                                            console.log("Active day on load:", dayNum) // Existing log
+                                        }
+                                    }
+
+                                    dayText.text = dayNum
+                                    dayNumber = dayNum
+
+                                    // Make the initial active day use the selected color (matches click behavior)
+                                    if (isCurrentMonth && dayNum === today.getDate()) {
+                                        calendarVisualRoot.selectedDayItem = dayCell
+                                        calendarVisualRoot.selectedDayText = dayText
+                                        dayText.color = "#28a0ae" // Selected color on load
+                                        console.log("Initial active day styled:", dayNum)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
-    // MONTH DROPDOWN floating above everything
     ListView {
         id: monthDropdown
         width: 110
@@ -322,7 +463,6 @@ Item {
         }
     }
 
-    // YEAR DROPDOWN floating above everything
     ListView {
         id: yearDropdown
         width: 60
