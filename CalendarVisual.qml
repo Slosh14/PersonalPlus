@@ -24,6 +24,55 @@ Item {
         return year.toString() + "-" + mm
     }
 
+    function getHomeStateHost() {
+        // Brief comment: walk up the parent chain to find Home.qml (the item that owns calendarActiveMonth/Year/Day)
+        var p = calendarVisualRoot
+        while (p && p.calendarActiveMonth === undefined) {
+            p = p.parent
+        }
+        console.log("Home state host found:", p) // Test log
+        return p
+    }
+
+    function saveMonthYearToHome(sourceLabel) {
+        // Brief comment: save current display month/year to Home so it survives page changes
+        var homeState = calendarVisualRoot.getHomeStateHost()
+        if (homeState) {
+            homeState.calendarActiveMonth = calendarVisualRoot.displayMonth
+            homeState.calendarActiveYear = calendarVisualRoot.displayYear
+            console.log("Saved month/year to Home via", sourceLabel, "->",
+                        homeState.calendarActiveMonth, homeState.calendarActiveYear) // Test log
+        } else {
+            console.log("ERROR: Could not find Home state host to save month/year (source:", sourceLabel, ")") // Test log
+        }
+    }
+
+    function restoreStateFromHome() {
+        // Brief comment: restore month/year/day from Home when CalendarVisual is recreated
+        var homeState = calendarVisualRoot.getHomeStateHost()
+        if (!homeState) {
+            console.log("No Home state host found on restore") // Test log
+            return
+        }
+
+        if (homeState.calendarActiveMonth !== -1 && homeState.calendarActiveYear !== -1) {
+            displayMonth = homeState.calendarActiveMonth
+            displayYear = homeState.calendarActiveYear
+            applyHeaderFromDisplay()
+
+            if (homeState.calendarActiveDay !== -1) {
+                var key = monthKey(displayYear, displayMonth)
+                selectedByMonthYear[key] = homeState.calendarActiveDay
+                console.log("Restored selection into map from Home ->", key, "->", homeState.calendarActiveDay) // Test log
+            }
+
+            console.log("Restored calendar state from Home -> MonthIndex:", displayMonth,
+                        "Year:", displayYear, "Day:", homeState.calendarActiveDay) // Test log
+        } else {
+            console.log("Home calendar state is empty (-1 values), using today") // Test log
+        }
+    }
+
     function registerInteractiveElement(element) {
         if (interactiveElements.indexOf(element) === -1) {
             interactiveElements.push(element)
@@ -146,6 +195,7 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
+        saveMonthYearToHome("down arrow") // Brief comment: keep Home month/year in sync when arrows are used
     }
 
     function goToPrevMonth() {
@@ -167,6 +217,7 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
+        saveMonthYearToHome("up arrow") // Brief comment: keep Home month/year in sync when arrows are used
     }
 
     Rectangle {
@@ -254,21 +305,22 @@ Item {
 
                     Image {
                         id: downArrowButton
-                        source: "buttons/downArrowUnClicked.svg"
+                        source: "buttons/upArrowUnClicked.svg"
                         width: 16
                         height: 16
                         anchors.centerIn: parent
                         fillMode: Image.PreserveAspectFit
+                        rotation: 180
 
                         MouseArea {
                             anchors.fill: parent
                             hoverEnabled: true
                             cursorShape: Qt.PointingHandCursor
-                            onEntered: downArrowButton.source = "buttons/downArrowHover.svg"
-                            onExited: downArrowButton.source = "buttons/downArrowUnClicked.svg"
+                            onEntered: downArrowButton.source = "buttons/upArrowHover.svg"
+                            onExited: downArrowButton.source = "buttons/upArrowUnClicked.svg"
                             onClicked: {
                                 console.log("Down arrow clicked")
-                                downArrowButton.source = "buttons/downArrowClicked.svg"
+                                downArrowButton.source = "buttons/upArrowClicked.svg"
                                 goToNextMonth()
                                 activatePanel(null)
                                 downArrowClickTimer.start()
@@ -280,7 +332,7 @@ Item {
                             interval: 100
                             repeat: false
                             onTriggered: {
-                                downArrowButton.source = "buttons/downArrowUnClicked.svg"
+                                downArrowButton.source = "buttons/upArrowUnClicked.svg"
                                 console.log("Down arrow reverted to unclicked state")
                             }
                         }
@@ -554,6 +606,18 @@ Item {
                                         calendarVisualRoot.clearAllRememberedSelectionsExceptCurrent()
                                         calendarVisualRoot.rememberSelectionForCurrentMonth(dayCell.dayNumber)
 
+                                        var homeState = calendarVisualRoot.getHomeStateHost() // Brief comment: get Home.qml to store calendar state
+                                        if (homeState) {
+                                            homeState.calendarActiveMonth = calendarVisualRoot.displayMonth
+                                            homeState.calendarActiveYear = calendarVisualRoot.displayYear
+                                            homeState.calendarActiveDay = dayCell.dayNumber
+                                            console.log("Saved calendar state to Home -> MonthIndex:", homeState.calendarActiveMonth,
+                                                        "Year:", homeState.calendarActiveYear,
+                                                        "Day:", homeState.calendarActiveDay) // Test log
+                                        } else {
+                                            console.log("ERROR: Could not find Home state host to save calendar values") // Test log
+                                        }
+
                                         activatePanel(null)
                                     }
                                 }
@@ -613,6 +677,8 @@ Item {
 
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
+
+                    saveMonthYearToHome("month dropdown") // Brief comment: keep Home month/year in sync when dropdown is used
                 }
             }
         }
@@ -656,15 +722,29 @@ Item {
 
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
+
+                    saveMonthYearToHome("year dropdown") // Brief comment: keep Home month/year in sync when dropdown is used
                 }
             }
         }
     }
 
     Component.onCompleted: {
-        // Brief comment: start on the real current month/year instead of the hardcoded defaults
-        setDisplayToToday()
-        console.log("Calendar initialized to current month/year:", monthText.text, yearText.text) // Test log
+        restoreStateFromHome() // Brief comment: try restoring from Home before defaulting to today
+
+        if (displayMonth === 8 && displayYear === 2025) {
+            // Brief comment: if Home had no state, initialize to the real current month/year
+            setDisplayToToday()
+        }
+
+        // Brief comment: force day cells to refresh after all Repeaters/Connections are fully created
+        Qt.callLater(function() {
+            calendarVisualRoot.displayMonthChanged()
+            calendarVisualRoot.displayYearChanged()
+            console.log("Forced calendar grid refresh after restore -> MonthIndex:", displayMonth, "Year:", displayYear) // Test log
+        })
+
+        console.log("CalendarVisual completed -> MonthIndex:", displayMonth, "Year:", displayYear) // Test log
 
         // Brief comment: spacing test log so you can confirm the header moved down
         console.log("Header Y position (should be lower):", monthYearRow.y) // Test log
