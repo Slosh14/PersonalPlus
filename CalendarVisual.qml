@@ -34,16 +34,35 @@ Item {
         return p
     }
 
-    function clearHomeCalendarState(sourceLabel) {
-        // Brief comment: do NOT persist month/year when navigating; reset Home values so Calendar falls back to today on reload
+    function finalizeHomeCalendarStateOnClose() {
+        // Brief comment: keep selection ONLY if user closes while viewing the saved month/year; otherwise clear for next load
         var homeState = calendarVisualRoot.getHomeStateHost()
-        if (homeState) {
+        if (!homeState) {
+            console.log("ERROR: Could not find Home state host on close finalize") // Test log
+            return
+        }
+
+        var hasSavedState =
+                (homeState.calendarActiveMonth !== -1 && homeState.calendarActiveYear !== -1)
+
+        if (!hasSavedState) {
+            console.log("Close finalize: no saved Home state, nothing to clear") // Test log
+            return
+        }
+
+        var isOnSavedMonthYear =
+                (calendarVisualRoot.displayMonth === homeState.calendarActiveMonth &&
+                 calendarVisualRoot.displayYear === homeState.calendarActiveYear)
+
+        if (isOnSavedMonthYear) {
+            console.log("Close finalize: on saved month/year -> keeping Home state:",
+                        homeState.calendarActiveMonth, homeState.calendarActiveYear, homeState.calendarActiveDay) // Test log
+        } else {
+            // Brief comment: redundant helper removed; clear Home state inline
             homeState.calendarActiveMonth = -1
             homeState.calendarActiveYear = -1
             homeState.calendarActiveDay = -1
-            console.log("Cleared Home calendar state via", sourceLabel, "-> (-1, -1, -1)") // Test log
-        } else {
-            console.log("ERROR: Could not find Home state host to clear calendar state (source:", sourceLabel, ")") // Test log
+            console.log("Close finalize: user closed on different month/year -> cleared Home state -> (-1, -1, -1)") // Test log
         }
     }
 
@@ -210,7 +229,7 @@ Item {
     }
 
     function goToNextMonth() {
-        // Brief comment: advance month text (wrap + bump year), then sync + clear visual selection
+        // Brief comment: advance month text (wrap + bump year), then sync + clear visual selection (Home state is finalized on close)
         var months = monthDropdown.model
         var currentIndex = months.indexOf(monthText.text)
         if (currentIndex === -1) {
@@ -228,12 +247,10 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
-
-        clearHomeCalendarState("down arrow") // Brief comment: navigation does NOT persist; force reload to fall back to today
     }
 
     function goToPrevMonth() {
-        // Brief comment: go back a month text (wrap + lower year), then sync + clear visual selection
+        // Brief comment: go back a month text (wrap + lower year), then sync + clear visual selection (Home state is finalized on close)
         var months = monthDropdown.model
         var currentIndex = months.indexOf(monthText.text)
         if (currentIndex === -1) {
@@ -251,8 +268,6 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
-
-        clearHomeCalendarState("up arrow") // Brief comment: navigation does NOT persist; force reload to fall back to today
     }
 
     Rectangle {
@@ -712,8 +727,6 @@ Item {
 
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
-
-                    clearHomeCalendarState("month dropdown") // Brief comment: navigation does NOT persist; force reload to fall back to today
                 }
             }
         }
@@ -757,8 +770,6 @@ Item {
 
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
-
-                    clearHomeCalendarState("year dropdown") // Brief comment: navigation does NOT persist; force reload to fall back to today
                 }
             }
         }
@@ -787,6 +798,8 @@ Item {
     }
 
     Component.onDestruction: {
-        console.log("CalendarVisual.qml destroyed:", calendarVisualRoot)
+        // Brief comment: finalize persistence rules on close (keep only if user returned to saved month/year)
+        finalizeHomeCalendarStateOnClose()
+        console.log("CalendarVisual.qml destroyed:", calendarVisualRoot) // Test log
     }
 }
