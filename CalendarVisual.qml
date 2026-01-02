@@ -34,16 +34,16 @@ Item {
         return p
     }
 
-    function saveMonthYearToHome(sourceLabel) {
-        // Brief comment: save current display month/year to Home so it survives page changes
+    function clearHomeCalendarState(sourceLabel) {
+        // Brief comment: do NOT persist month/year when navigating; reset Home values so Calendar falls back to today on reload
         var homeState = calendarVisualRoot.getHomeStateHost()
         if (homeState) {
-            homeState.calendarActiveMonth = calendarVisualRoot.displayMonth
-            homeState.calendarActiveYear = calendarVisualRoot.displayYear
-            console.log("Saved month/year to Home via", sourceLabel, "->",
-                        homeState.calendarActiveMonth, homeState.calendarActiveYear) // Test log
+            homeState.calendarActiveMonth = -1
+            homeState.calendarActiveYear = -1
+            homeState.calendarActiveDay = -1
+            console.log("Cleared Home calendar state via", sourceLabel, "-> (-1, -1, -1)") // Test log
         } else {
-            console.log("ERROR: Could not find Home state host to save month/year (source:", sourceLabel, ")") // Test log
+            console.log("ERROR: Could not find Home state host to clear calendar state (source:", sourceLabel, ")") // Test log
         }
     }
 
@@ -195,7 +195,8 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
-        saveMonthYearToHome("down arrow") // Brief comment: keep Home month/year in sync when arrows are used
+
+        clearHomeCalendarState("down arrow") // Brief comment: navigation does NOT persist; force reload to fall back to today
     }
 
     function goToPrevMonth() {
@@ -217,7 +218,8 @@ Item {
 
         clearSelectedDayVisual()
         syncDisplayFromHeader()
-        saveMonthYearToHome("up arrow") // Brief comment: keep Home month/year in sync when arrows are used
+
+        clearHomeCalendarState("up arrow") // Brief comment: navigation does NOT persist; force reload to fall back to today
     }
 
     Rectangle {
@@ -678,7 +680,7 @@ Item {
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
 
-                    saveMonthYearToHome("month dropdown") // Brief comment: keep Home month/year in sync when dropdown is used
+                    clearHomeCalendarState("month dropdown") // Brief comment: navigation does NOT persist; force reload to fall back to today
                 }
             }
         }
@@ -723,7 +725,7 @@ Item {
                     clearSelectedDayVisual()
                     syncDisplayFromHeader()
 
-                    saveMonthYearToHome("year dropdown") // Brief comment: keep Home month/year in sync when dropdown is used
+                    clearHomeCalendarState("year dropdown") // Brief comment: navigation does NOT persist; force reload to fall back to today
                 }
             }
         }
@@ -745,8 +747,6 @@ Item {
         })
 
         console.log("CalendarVisual completed -> MonthIndex:", displayMonth, "Year:", displayYear) // Test log
-
-        // Brief comment: spacing test log so you can confirm the header moved down
         console.log("Header Y position (should be lower):", monthYearRow.y) // Test log
     }
 
