@@ -176,6 +176,39 @@ Item {
         console.log("Calendar set to today on load -> MonthIndex:", displayMonth, "Year:", displayYear) // Test log
     }
 
+    function ensureTodayIsActiveIfNoSelection() {
+        // Brief comment: if there is no remembered selection, auto-select today's underlined day (and persist to Home for reload)
+        var today = new Date()
+        var isDisplayTodayMonth =
+                (displayMonth === today.getMonth() && displayYear === today.getFullYear())
+
+        if (!isDisplayTodayMonth) {
+            console.log("ensureTodayIsActiveIfNoSelection skipped: display is not today month/year") // Test log
+            return
+        }
+
+        var remembered = getRememberedSelectionForCurrentMonth()
+        if (remembered !== undefined) {
+            console.log("ensureTodayIsActiveIfNoSelection skipped: selection already remembered ->", remembered) // Test log
+            return
+        }
+
+        var dayNum = today.getDate()
+        clearAllRememberedSelectionsExceptCurrent()
+        rememberSelectionForCurrentMonth(dayNum)
+
+        var homeState = calendarVisualRoot.getHomeStateHost()
+        if (homeState) {
+            homeState.calendarActiveMonth = displayMonth
+            homeState.calendarActiveYear = displayYear
+            homeState.calendarActiveDay = dayNum
+            console.log("Auto-selected today (underlined) and saved to Home -> MonthIndex:", displayMonth,
+                        "Year:", displayYear, "Day:", dayNum) // Test log
+        } else {
+            console.log("ERROR: Could not find Home state host to save auto-selected today") // Test log
+        }
+    }
+
     function goToNextMonth() {
         // Brief comment: advance month text (wrap + bump year), then sync + clear visual selection
         var months = monthDropdown.model
@@ -738,6 +771,9 @@ Item {
             // Brief comment: if Home had no state, initialize to the real current month/year
             setDisplayToToday()
         }
+
+        // Brief comment: if we have no saved selection, make today (the underlined date) active by default
+        ensureTodayIsActiveIfNoSelection()
 
         // Brief comment: force day cells to refresh after all Repeaters/Connections are fully created
         Qt.callLater(function() {
